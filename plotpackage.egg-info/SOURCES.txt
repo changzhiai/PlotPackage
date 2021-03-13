@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+setup.py
+plotpackage/CurvePlot.py
+plotpackage/FreeEnergyDiagram.py
+plotpackage/FreeEnergyDiagramPlot.py
+plotpackage/RealTimePlot.py
+plotpackage/SmoothPlot.py
+plotpackage/__init__.py
+plotpackage.egg-info/PKG-INFO
+plotpackage.egg-info/SOURCES.txt
+plotpackage.egg-info/dependency_links.txt
+plotpackage.egg-info/top_level.txt
