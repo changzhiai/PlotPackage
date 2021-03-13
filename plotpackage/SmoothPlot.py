@@ -16,8 +16,8 @@ y = [1, 5, 0]
 
 f = interp1d(x, y, kind='quadratic')
 
-x_interpol = np.linspace(1, 4, 1000)
-y_interpol = f(x_interpol)
+x_interpol = np.linspace(1, 4, 1000) #genenate x points
+y_interpol = f(x_interpol) 
 
 plt.plot(x_interpol, y_interpol)
 plt.show()
