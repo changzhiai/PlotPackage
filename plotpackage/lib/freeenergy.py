@@ -12,8 +12,6 @@ import numpy as np
 from scipy.interpolate import interp1d
 
 
-
-
 class EnergyDiagram:
     def __init__(self, aspect='equal'):
         # plot parameters
@@ -70,9 +68,6 @@ class EnergyDiagram:
         
         self.links.append(link)
         self.barriers.append(barrier)
-        
-
-
 
     def add_link(self, start_level_id, end_level_id, color='k', ls='--', linewidth=1, ):
         
@@ -83,7 +78,6 @@ class EnergyDiagram:
         
         self.barriers[start_level_id].append((end_level_id, barrier, ls, linewidth, color))
         #print(self.barrier)
-    
 
     def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None):
 

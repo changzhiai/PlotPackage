@@ -1,9 +1,10 @@
 README.md
 pyproject.toml
 setup.py
+plotpackage/CO2RR_plot.py
 plotpackage/CurvePlot.py
-plotpackage/FreeEnergyDiagram.py
 plotpackage/FreeEnergyDiagramPlot.py
+plotpackage/HER_plot.py
 plotpackage/RealTimePlot.py
 plotpackage/SmoothPlot.py
 plotpackage/__init__.py
@@ -11,3 +12,9 @@ plotpackage.egg-info/PKG-INFO
 plotpackage.egg-info/SOURCES.txt
 plotpackage.egg-info/dependency_links.txt
 plotpackage.egg-info/top_level.txt
+plotpackage/lib/CO2RR.py
+plotpackage/lib/HER.py
+plotpackage/lib/__init__.py
+plotpackage/lib/freeenergy.py
+plotpackage/lib/io.py
+plotpackage/lib/scalingrelation.py

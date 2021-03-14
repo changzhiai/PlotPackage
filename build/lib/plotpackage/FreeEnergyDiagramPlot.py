@@ -7,13 +7,14 @@ Created on Sun Mar  7 14:24:21 2021
 
 import numpy as np
 import pandas as pd
-from FreeEnergyDiagram import EnergyDiagram
+from plotpackage.lib.io import read_excel, read_csv
+from plotpackage.lib.freeenergy import EnergyDiagram
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, plot, title, legend, xlabel, ylabel, show, tick_params
 import xlrd
 
 ############only part needs to change##############
-filename = '../data/HER.xlsx'
+filename = './data/HER.xlsx'
 # #change it for both; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 # min_col = 12 #value 1 means it starts from 2rd(B) col in excel
 # max_col = 16 #value 5 means it ends to 5th col (not including 6th col); 2-5(B-E) cols (1-4 in python)
@@ -37,40 +38,13 @@ row_of_tag = min_row-1 #value 0 means 1st raw in excel;row number of tag
 col_of_tag = min_col-1 #value 0 means 1st(A) coloum in excel; coloum number of tag
 
 #saved figure name
-figName1 = '../pictures/FreeEnergy.jpg'  #free energy diagram name
-figName2 = '../pictures/ScalingRelation.jpg' #scaling reation figure name
-
-########### load excel data function###############
-
-def read_excel(filename='./excel_data.xlsx'):  
-    #doc = xlrd.open_workbook(filename).sheet_by_index(sheet)
-    doc = xlrd.open_workbook(filename).sheet_by_name(sheet)
-    stepsNames = doc.row_values(rowx=row_of_tag, start_colx=min_col, end_colx=max_col) # change 5 into xxx; obtain attributes name
-    observationName = doc.col_values(col_of_tag, min_row, max_row) # change 9 into yyy; obtain observation name (0 coloum, 1-8 tags)
-
-    X = np.empty((len(observationName),len(stepsNames)))
-    for i in range(len(stepsNames)):
-        X[:,i] = np.array(doc.col_values(i+1+col_of_tag ,1+row_of_tag,len(observationName)+1+row_of_tag)).T #raw data 
-    return stepsNames, observationName, X
-    
-
-########### load csv data function#################
-
-def read_csv(filename = './csv_data.csv'):  
-    df = pd.read_csv(filename)
-    raw_data = df.values
-    
-    cols = range(min_col, max_col) # change 5 into xxx
-    stepsNames = np.asarray(df.columns[cols])  # obtain attributes name
-    observationName = raw_data[:, 0] # obtain observation name
-    
-    X = raw_data[:, cols] # X = np.around(X.astype(np.double), decimals=3) # remain three decimal
-    return stepsNames, observationName, X
+figName1 = './pictures/FreeEnergy.jpg'  #free energy diagram name
+figName2 = './pictures/ScalingRelation.jpg' #scaling reation figure name
 
 ############ plot free energy diagram ###############
 
-stepsNames, observationName, X = read_excel(filename=filename) #load excel data
-#stepsNames, observationName, X = read_csv(filename=filename) #load csv data
+stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
+#stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 print('auto loaded stepsName: ', stepsNames)
 print('auto loaded obserName: ', observationName)
 print('auto loaded data: \n', X)

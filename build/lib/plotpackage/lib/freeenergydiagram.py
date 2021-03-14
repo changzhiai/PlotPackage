@@ -9,8 +9,9 @@ Created on Sun Mar  7 14:24:21 2021
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
-
 from scipy.interpolate import interp1d
+
+
 
 
 class EnergyDiagram:
