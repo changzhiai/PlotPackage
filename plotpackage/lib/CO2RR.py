@@ -55,7 +55,7 @@ class CO2RRplot:
         
         #add legend
         for specis in range(len(self.observationName)):
-            plt.hlines(0.8, 0.5, 0.5, color=colorList[specis], label= self.observationName[specis])
+            plt.hlines(0.1, 0.5, 0.5, color=colorList[specis], label= self.observationName[specis])
         plt.legend(fontsize=12)
         
         plt.show()

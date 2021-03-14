@@ -15,6 +15,7 @@ plotpackage.egg-info/top_level.txt
 plotpackage/lib/CO2RR.py
 plotpackage/lib/HER.py
 plotpackage/lib/__init__.py
+plotpackage/lib/figsmetadata.py
 plotpackage/lib/freeenergy.py
 plotpackage/lib/io.py
 plotpackage/lib/scalingrelation.py

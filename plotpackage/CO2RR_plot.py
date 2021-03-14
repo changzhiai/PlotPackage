@@ -9,6 +9,7 @@ from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.freeenergy import EnergyDiagram
 from plotpackage.lib.CO2RR import CO2RRplot
 from plotpackage.lib.scalingrelation import ScalingRelationPlot
+from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 
 filename = './data/doping-top-magnetic.xlsx'
@@ -22,7 +23,7 @@ min_row = 1 #1st column in excel
 max_row = 9 #9st column in excel
 
 #saved figure name
-figName1 = './pictures/HER_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
+figName1 = './pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
 figName2 = './pictures/ScalingRelation_' + sheet + '.jpg' #scaling reation figure name
 
 ############ plot free energy diagram ###############
@@ -36,3 +37,8 @@ descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
 descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
 sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)
 sr.plot()
+
+#add metadata into pictures
+figNames = [figName1, figName2]
+fmd = FigsMetaData(figNames, filename, sheet, min_col, max_col, min_row, max_row)
+fmd.add_metadata()

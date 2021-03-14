@@ -15,7 +15,7 @@ from scipy.interpolate import interp1d
 class EnergyDiagram:
     def __init__(self, aspect='equal'):
         # plot parameters
-        self.ratio = 2.0 #1.6181 #1.5
+        self.ratio = 1.6181 #1.5
         self.dimension = 'auto'
         self.space = 'auto'
         self.offset = 'auto'
