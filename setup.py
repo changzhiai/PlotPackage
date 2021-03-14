@@ -16,7 +16,7 @@ install_requires = [
 
 setup(
     name="plotpackage",
-    version='1.0',
+    version='1.1',
     description="plot toolbox",
     url="None",
     author="Changzhi Ai",
