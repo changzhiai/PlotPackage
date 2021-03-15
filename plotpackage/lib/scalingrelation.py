@@ -15,27 +15,37 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red'):                
         print('scaling relation:')
         print('descriper1: ', self.descriper1)
         print('descriper2: ', self.descriper2, '\n')
         
         #plot data points
-        fig = plt.figure(figsize=(8, 6), dpi = 300)
-        plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
+        if not ax:
+            fig = plt.figure(figsize=(8, 6), dpi = 300)
+            ax = fig.add_subplot(111)
+        # Otherwise register the axes and figure the user passed.
+        else:
+            self.ax = ax
+            self.fig = ax.figure
+
+        #fig = plt.figure(figsize=(8, 6), dpi = 300)
+        #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
+        plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
         plt.xlabel('*HOCO', fontsize=14)
         plt.ylabel('*CO', fontsize=14)
         plt.margins(y=0.08)
         
         #get current axis object and change format
-        ax = fig.gca()
+        #ax = fig.gca()
         ax.tick_params(labelsize=12) #tick label font size
         for axis in ['top','bottom','left','right']:
             ax.spines[axis].set_linewidth(1.2) #linewith of frame
         
         #linear fiting and plot linear line
         m, b = np.polyfit(self.descriper1, self.descriper2, 1)
-        handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color='red')
+        handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color=linecolor)
+        #handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color='red')
         
         #add data tag annotation
         for i, name in enumerate(self.observationName):
@@ -50,5 +60,5 @@ class ScalingRelationPlot:
         #plt.text(0.85, 0.3, 'R2 = {}'.format(r2), fontsize=14)
         plt.legend(handles = handleFit, labels = ['$R^2$ = {}'.format(r2)], loc="lower right", handlelength=0, fontsize=14)
         
-        plt.show()
-        fig.savefig(self.figName)
+        # plt.show()
+        # fig.savefig(self.figName)

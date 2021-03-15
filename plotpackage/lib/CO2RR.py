@@ -9,7 +9,7 @@ from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.freeenergy import EnergyDiagram
 import matplotlib.pyplot as plt
 
-class CO2RRplot:
+class CO2RRFEDplot:
     def __init__(self, stepsnames, obsername, X_, figname):
         # plot parameters
         self.stepsNames = stepsnames
