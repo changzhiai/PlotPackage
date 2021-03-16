@@ -15,7 +15,7 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red'):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False):                
         print('scaling relation:')
         print('descriper1: ', self.descriper1)
         print('descriper2: ', self.descriper2, '\n')
@@ -60,5 +60,7 @@ class ScalingRelationPlot:
         #plt.text(0.85, 0.3, 'R2 = {}'.format(r2), fontsize=14)
         plt.legend(handles = handleFit, labels = ['$R^2$ = {}'.format(r2)], loc="lower right", handlelength=0, fontsize=14)
         
-        # plt.show()
-        # fig.savefig(self.figName)
+        #save figure
+        if save == True: 
+            plt.show()
+            fig.savefig(self.figName)

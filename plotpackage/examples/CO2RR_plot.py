@@ -38,9 +38,10 @@ CO2RRdiagram.plot()
 descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
 descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
 sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)
-sr.plot()
+sr.plot(save=True)
 
 #add metadata into pictures
 figNames = [figName1, figName2]
 fmd = FigsMetaData(figNames, filename, sheet, min_col, max_col, min_row, max_row)
 fmd.add_metadata()
+
