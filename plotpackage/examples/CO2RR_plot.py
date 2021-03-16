@@ -6,7 +6,7 @@ Created on Sun Mar 14 01:02:52 2021
 """
 #import parent dirs for local
 import sys
-sys.path.append("..")
+sys.path.append("../..")
 
 from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.CO2RR import CO2RRFEDplot
@@ -14,7 +14,7 @@ from plotpackage.lib.scalingrelation import ScalingRelationPlot
 from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 
-filename = './data/doping-top-magnetic.xlsx'
+filename = '../data/doping-top-magnetic.xlsx'
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
@@ -25,8 +25,8 @@ min_row = 1 #1st column in excel
 max_row = 9 #9st column in excel
 
 #saved figure name
-figName1 = './pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
-figName2 = './pictures/ScalingRelation_' + sheet + '.jpg' #scaling reation figure name
+figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
+figName2 = '../pictures/ScalingRelation_' + sheet + '.jpg' #scaling reation figure name
 
 ############ plot free energy diagram ###############
 

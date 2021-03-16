@@ -11,7 +11,7 @@ from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 
 ############only part needs to change##############
-filename = './data/HER.xlsx'
+filename = '../data/HER.xlsx'
 
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 min_col = 1 #1st column in excel
@@ -23,7 +23,7 @@ min_row = 1 #1st column in excel
 max_row = 11 #11th column in excel
 
 #saved figure name
-figName = './pictures/HER_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
+figName = '../pictures/HER_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
 
 ############ plot free energy diagram ###############
 
