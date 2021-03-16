@@ -56,7 +56,7 @@ plt.legend(fontsize=12)
 plt.show()
 fig.savefig(srFigName)
 
-#add metadata into pictures
+#add metadata into picture
 figNames = [srFigName]
 fmd = FigsMetaData(figNames, filename, 'all', min_col, max_col, min_row, max_row)
 fmd.add_metadata()
