@@ -9,7 +9,7 @@ from exif import Image
 
 #for identifying pictures
 class FigsMetaData:
-    def __init__(self, fignames, filename, sheet, min_col, max_col, min_row, max_row):
+    def __init__(self, fignames='none', filename='none', sheet='none', min_col=0, max_col=0, min_row=0, max_row=0):
         self.figNames = fignames
         self.filename = filename
         self.sheet = sheet

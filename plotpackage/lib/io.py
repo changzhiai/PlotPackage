@@ -34,3 +34,38 @@ def read_csv(filename = './csv_data.csv', min_col=1, max_col=5):
     
     X = raw_data[:, cols] # X = np.around(X.astype(np.double), decimals=3) # remain three decimal
     return stepsNames, observationName, X
+
+# load txt data
+def read_txt(filename, min_col=1, max_col=5):  #for no blank lines case
+    file = open(filename, 'r') 
+    stepsNames = file.readline().split()
+    
+    raw_data = np.loadtxt(filename, usecols=range(min_col-1, max_col), dtype=str, skiprows=1)
+    observationName = raw_data[:, min_col-1]
+    
+    X = raw_data[:, min_col:].astype(float)
+    return stepsNames, observationName, X
+
+# read two column txt
+def read_two_column_file(filename):  #for no blank lines case
+    file = open(filename, 'r') 
+    lines = file.readlines()
+    x = []
+    y = []
+    for line in lines:
+        p = line.split()
+        x.append(float(p[0]))
+        y.append(float(p[1]))
+    return x, y
+
+# read two column txt with blank lines every x lines; for blank case like PDOS
+def read_two_column_PDOS(filename, l, threshold): 
+    x = []
+    y = []
+    file = open(filename, 'r') 
+    lines = file.readlines()
+    for line in lines[threshold*l+l:threshold*(l+1)+l]:
+        p = line.split()
+        x.append(float(p[0]))
+        y.append(float(p[1]))
+    return x, y
