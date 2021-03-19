@@ -15,10 +15,10 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO'):                
         print('scaling relation:')
-        print('descriper1: ', self.descriper1)
-        print('descriper2: ', self.descriper2, '\n')
+        print('x axis' + '(' + xlabel + '): ', self.descriper1)
+        print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
         
         #plot data points
         if not ax:
@@ -32,8 +32,8 @@ class ScalingRelationPlot:
         #fig = plt.figure(figsize=(8, 6), dpi = 300)
         #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
         plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
-        plt.xlabel('*HOCO', fontsize=14)
-        plt.ylabel('*CO', fontsize=14)
+        plt.xlabel(xlabel, fontsize=14)
+        plt.ylabel(ylabel, fontsize=14)
         plt.margins(y=0.08)
         
         #get current axis object and change format
