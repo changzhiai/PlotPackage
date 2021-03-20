@@ -16,8 +16,8 @@ from plotpackage.lib.scalingrelation import ScalingRelationPlot
 from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 
-fig = plt.figure(figsize=(8, 6), dpi = 300)
-ax = fig.add_subplot(111)
+# fig = plt.figure(figsize=(8, 6), dpi = 300)
+# ax = fig.add_subplot(111)
 
 ############CO2RR only part needs to change##############
 filename = '../data/CO2RR.xlsx'
@@ -63,8 +63,8 @@ figName = '../pictures/ScalingRelation_HOCO_H' + sheet + '.jpg' #scaling reation
 sr = ScalingRelationPlot(descriper1, descriperHER, observationName2, figName)
 sr.plot(save=True, xlabel='*HOCO', ylabel='*H')
 
-figName = '../pictures/ScalingRelation_CO_H' + sheet + '.jpg' #scaling reation figure name
-sr = ScalingRelationPlot(descriper2, descriperHER, observationName2, figName)
+figName2 = '../pictures/ScalingRelation_CO_H' + sheet + '.jpg' #scaling reation figure name
+sr = ScalingRelationPlot(descriper2, descriperHER, observationName2, figName2)
 sr.plot(save=True, xlabel='*CO', ylabel='*H')
 
 # #add metadata into pictures
