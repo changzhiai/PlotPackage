@@ -32,6 +32,7 @@ plt.xlim([-10, 8])
 plt.ylim([-300, 400])
 plt.xlabel('Energy (eV)', fontsize=14)
 plt.ylabel('PDOS', fontsize=14)
+plt.title('dos', fontsize=14)
 ax = fig.gca()
 ax.tick_params(labelsize=12) #tick label font size
 for axis in ['top','bottom','left','right']:

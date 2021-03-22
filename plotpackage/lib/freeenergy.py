@@ -79,7 +79,7 @@ class EnergyDiagram:
         self.barriers[start_level_id].append((end_level_id, barrier, ls, linewidth, color))
         #print(self.barrier)
 
-    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None):
+    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title=''):
 
         # Create a figure and axis if the user didn't specify them.
         if not ax:
@@ -104,6 +104,7 @@ class EnergyDiagram:
         ax.spines['top'].set_visible(True)
         ax.spines['right'].set_visible(True)
         ax.spines['bottom'].set_visible(True)
+        plt.title(title, fontsize=14)
         for axis in ['top','bottom','left','right']:
             ax.spines[axis].set_linewidth(1.2) #linewith of frame
 

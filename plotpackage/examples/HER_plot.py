@@ -30,7 +30,7 @@ figName = '../pictures/HER_FreeEnergy_' + sheet + '.jpg'  #free energy diagram n
 stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 HERdiagram = HERFEDplot(stepsNames, observationName, X, figName)
-HERdiagram.plot()
+HERdiagram.plot(title=sheet)
 
 
 #add metadata into pictures

@@ -15,7 +15,7 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO'):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO',title=''):                
         print('scaling relation:')
         print('x axis' + '(' + xlabel + '): ', self.descriper1)
         print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
@@ -35,6 +35,7 @@ class ScalingRelationPlot:
         plt.xlabel(xlabel, fontsize=14)
         plt.ylabel(ylabel, fontsize=14)
         plt.margins(y=0.08)
+        plt.title(title, fontsize=14)
         
         #get current axis object and change format
         #ax = fig.gca()

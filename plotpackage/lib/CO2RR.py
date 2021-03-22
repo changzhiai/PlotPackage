@@ -17,7 +17,7 @@ class CO2RRFEDplot:
         self.X = X_
         self.figName = figname
         
-    def plot(self):
+    def plot(self, title=''):
         #self.stepsNames, self.observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
         #self.stepsNames, self.observationName, X = read_csv(filename, , min_col, max_col) #load csv data
         print('auto loaded stepsName: ', self.stepsNames)
@@ -51,7 +51,7 @@ class CO2RRFEDplot:
         axFree = figFree.add_subplot(111)
                 
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
+        diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, title=title) # this is the default ylabel
         
         #add legend
         for specis in range(len(self.observationName)):

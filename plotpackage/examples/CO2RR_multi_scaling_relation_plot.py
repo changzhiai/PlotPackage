@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # basic parameters
 
-filename = '../data/doping-top-magnetic.xlsx'
+filename = '../data/CO2RR.xlsx'
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
@@ -51,6 +51,7 @@ lables = ['overlayer', 'island', 'paral', 'single atom for near site']   # reloa
 for specis in range(len(sheets)):
     plt.hlines(0.1, 0.5, 0.5, color=colorList[specis], label= lables[specis])
 plt.legend(fontsize=12)
+plt.title('muti-sacling relation', fontsize=14)
 
 #save figure
 plt.show()

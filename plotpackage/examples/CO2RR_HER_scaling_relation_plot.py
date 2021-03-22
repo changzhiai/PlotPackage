@@ -61,11 +61,11 @@ descriperHER = X2[:, 1]
 #saved figure name
 figName = '../pictures/ScalingRelation_HOCO_H' + sheet + '.jpg' #scaling reation figure name
 sr = ScalingRelationPlot(descriper1, descriperHER, observationName2, figName)
-sr.plot(save=True, xlabel='*HOCO', ylabel='*H')
+sr.plot(save=True, xlabel='*HOCO', ylabel='*H', title=sheet)
 
 figName2 = '../pictures/ScalingRelation_CO_H' + sheet + '.jpg' #scaling reation figure name
 sr = ScalingRelationPlot(descriper2, descriperHER, observationName2, figName2)
-sr.plot(save=True, xlabel='*CO', ylabel='*H')
+sr.plot(save=True, xlabel='*CO', ylabel='*H', title=sheet)
 
 # #add metadata into pictures
 # figNames = [figName]

@@ -16,7 +16,7 @@ class HERFEDplot:
         self.X = X_
         self.figName = figname
         
-    def plot(self):
+    def plot(self, title=''):
         #self.stepsNames, self.observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
         #self.stepsNames, self.observationName, X = read_csv(filename, , min_col, max_col) #load csv data
         print('auto loaded stepsName: ', self.stepsNames)
@@ -56,6 +56,7 @@ class HERFEDplot:
         for specis in range(len(self.observationName)):
             plt.hlines(0.1, 0.5, 0.5, color=colorList[specis], label= self.observationName[specis])
         plt.legend(fontsize=12)
+        plt.title(title, fontsize=14)
         
         plt.show()
         figFree.savefig(self.figName)
