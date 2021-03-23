@@ -205,7 +205,7 @@ class EnergyDiagram:
                               ls=i[2],
                               linewidth=i[3],
                               color=i[4])
-                ax.add_line(line)
+                #ax.add_line(line)
 
 
     def __auto_adjust(self):

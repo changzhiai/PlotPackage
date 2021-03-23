@@ -51,12 +51,13 @@ class CO2RRFEDplot:
         axFree = figFree.add_subplot(111)
                 
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, title=title) # this is the default ylabel
+        diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
         
         #add legend
         for specis in range(len(self.observationName)):
             plt.hlines(0.1, 0.5, 0.5, color=colorList[specis], label= self.observationName[specis])
         plt.legend(fontsize=12)
+        plt.title(title, fontsize=14)
         
         plt.show()
         figFree.savefig(self.figName)
