@@ -33,10 +33,13 @@ class EnergyDiagram:
         self.left_texts = []        
         self.links = []
         self.barriers = []
+        self.ts_energies = []
+        self.all_energies = []
+        
         # matplotlib fiugre handlers
         self.fig = None
         self.ax = None
-        self.label = []
+        self.label = []   
 
     def add_level(self, energy, bottom_text='', position=None, color='k',
                   top_text='', right_text='', left_text='', label=''):
@@ -76,6 +79,7 @@ class EnergyDiagram:
         
     def add_barrier(self, start_level_id, barrier, end_level_id, color='k', ls='--', linewidth=1, ):
         
+        self.ts_energies.append(barrier)       
         self.barriers[start_level_id].append((end_level_id, barrier, ls, linewidth, color))
         #print(self.barrier)
 
@@ -222,7 +226,8 @@ class EnergyDiagram:
 
         '''
         # Max range between the energy
-        Energy_variation = abs(max(self.energies) - min(self.energies))
+        self.all_energies = self.energies + self.ts_energies
+        Energy_variation = abs(max(self.all_energies) - min(self.all_energies))
         if self.dimension == 'auto' or self.space == 'auto':
             # Unique positions of the levels
             unique_positions = float(len(set(self.positions)))
