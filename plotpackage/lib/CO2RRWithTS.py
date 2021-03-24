@@ -31,8 +31,14 @@ class CO2RRFEDplot:
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
         #self.stepsNames = ['* + $H^+$', '*H', '* + 1/2$H_2$',]  #reload step name for HER
         #self.observationName = ["Pure", "Ni", "Co", "V", "Cr", "Mn", "Fe", "Pt"]  #reload specis name
-        for step in range(int((len(self.stepsNames)+1)/2.0)):
-            self.stepsNames 
+        
+        # delNames = []
+        # for i in range(int(len(self.stepsNames))):
+        #     if i % 2 != 0:
+        #         delNames.append(self.stepsNames[i])
+        # xtickslb = list(set(self.stepsNames).difference(set(delNames)))
+        # print(xtickslb)
+
         print('reload:', self.stepsNames)
         print('reload:', self.observationName, '\n')
         
