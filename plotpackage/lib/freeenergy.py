@@ -210,6 +210,7 @@ class EnergyDiagram:
                               linewidth=i[3],
                               color=i[4])
                 #ax.add_line(line)
+        return pos #return x ticks values
 
 
     def __auto_adjust(self):
