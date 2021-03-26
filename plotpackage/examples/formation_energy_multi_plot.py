@@ -50,7 +50,7 @@ ax.tick_params(labelsize=12) #tick label font size
 for axis in ['top','bottom','left','right']:
     ax.spines[axis].set_linewidth(1.2) #linewith of frame
 plt.show()
-plt.savefig(figName1)
+fig.savefig(figName1)
 
 
 #add metadata into pictures
