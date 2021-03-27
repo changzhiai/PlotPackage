@@ -21,7 +21,7 @@ class CO2RRFEDplot:
         self.axFree = None
         self.figFree = None
         
-    def plot(self, title='', ax: plt.Axes = None):
+    def plot(self, title=''):
         #self.stepsNames, self.observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
         #self.stepsNames, self.observationName, X = read_csv(filename, , min_col, max_col) #load csv data
         print('auto loaded stepsName: ', self.stepsNames)
@@ -61,14 +61,10 @@ class CO2RRFEDplot:
                     else: #plot ts barrier
                         diagram.add_barrier(start_level_id=count-1, barrier=self.X[specis][energy_col+1]+self.X[specis][energy_col], end_level_id=count, color = colorList[specis]) #add energy TS barriers
         
-        if not ax:
-            figFree = plt.figure(figsize=(8,6), dpi = 300)
-            axFree = figFree.add_subplot(111)
-        else:
-            self.axFree = ax
-            self.figFree = ax.figure
+        figFree = plt.figure(figsize=(8,6), dpi = 300)
+        axFree = figFree.add_subplot(111)
                 
-        #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
+        # diagram.add_barrier(start_level_id=0, barrier=2, end_level_id=1) #add energy barriers
         #diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
         pos = diagram.plot(xtickslabel = realSteps, stepLens=len(realSteps), ax=axFree) # this is the default ylabel
         #add legend
@@ -77,5 +73,7 @@ class CO2RRFEDplot:
         plt.legend(fontsize=12)
         plt.title(title, fontsize=14)
         
-        plt.show()
-        figFree.savefig(self.figName)
+        # plt.show()
+        # figFree.savefig(self.figName)
+        
+        return diagram
