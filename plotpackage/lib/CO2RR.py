@@ -20,14 +20,13 @@ class CO2RRFEDplot:
         self.axFree = None
         self.figFree = None
         
-    def plot(self, title='', ax: plt.Axes = None):
         #self.stepsNames, self.observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
         #self.stepsNames, self.observationName, X = read_csv(filename, , min_col, max_col) #load csv data
         print('auto loaded stepsName: ', self.stepsNames)
         print('auto loaded obserName: ', self.observationName)
         print('auto loaded data: \n', self.X)
         
-        colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g']
+        self.colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g']
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
@@ -37,32 +36,37 @@ class CO2RRFEDplot:
         print('reload:', self.observationName, '\n')
         
         
-        diagram = EnergyDiagram()
+        self.diagram = EnergyDiagram()
         count = 0
         for specis in range(len(self.observationName)):
             for step in range(len(self.stepsNames)):
                 count += 1
                 if step == 0:
-                    diagram.pos_number = 0
+                    self.diagram.pos_number = 0
                     
-                diagram.add_level(self.X[specis][step], color = colorList[specis])
+                self.diagram.add_level(self.X[specis][step], color = self.colorList[specis])
         
                 if count % (len(self.stepsNames)) != 0:
-                    diagram.add_link(count-1, count, color = colorList[specis])
-        
-        if not ax:
-            figFree = plt.figure(figsize=(8,6), dpi = 300)
-            axFree = figFree.add_subplot(111)
-        else:
-            self.axFree = ax
-            self.figFree = ax.figure
-                
+                    self.diagram.add_link(count-1, count, color = self.colorList[specis])
+    
+    def add_link(self, start_id=None, end_id=None, color='k', linestyle='--', linewidth=1):
+        if start_id != None and end_id != None:  #pos starts from 0
+            self.diagram.add_link(start_id, end_id, color, linestyle, linewidth)
+
+    def remove_link(self, start_id=None, end_id=None):
+        if start_id != None and end_id != None:
+            self.diagram.remove_link(start_id, end_id)
+    
+    def plot(self, title=''):
+        figFree = plt.figure(figsize=(8,6), dpi = 300)
+        axFree = figFree.add_subplot(111)
+           
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        pos = diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
+        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
         
         #add legend
         for specis in range(len(self.observationName)):
-            plt.hlines(0.1, pos[0], pos[0], color=colorList[specis], label= self.observationName[specis])
+            plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= self.observationName[specis])
         plt.legend(fontsize=12)
         plt.title(title, fontsize=14)
         

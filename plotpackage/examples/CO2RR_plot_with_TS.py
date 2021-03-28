@@ -33,11 +33,12 @@ figName2 = '../pictures/ScalingRelation_' + sheet + '.jpg' #scaling reation figu
 stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
-diagram = CO2RRdiagram.plot(title=sheet)
-
-# diagram.add_barrier(start_level_id=0, barrier=2, end_level_id=1) #add energy barriers
-# diagram.plot()
-
+# #costom connection
+# CO2RRdiagram.add_ts(start_id=1, barrier=1, end_id=3)
+# CO2RRdiagram.remove_ts(start_id=2, end_id=3)
+# CO2RRdiagram.add_link(start_id=0, end_id=3)
+# CO2RRdiagram.remove_link(start_id=0, end_id=1)
+CO2RRdiagram.plot(title=sheet)
 
 descriper1 = (X[:, 2] - X[:, 0]).astype(float) #step2-step1
 descriper2 = (X[:, 4] - X[:, 6]).astype(float) #step3-step4

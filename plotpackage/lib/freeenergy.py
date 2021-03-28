@@ -76,12 +76,28 @@ class EnergyDiagram:
         
         self.links[start_level_id].append((end_level_id, ls, linewidth, color))
         #print(self.links)
+    
+    def remove_link(self, start_level_id, end_level_id):
+        
+        for i, link in enumerate(self.links):
+            for j in link: 
+                if start_level_id == i and end_level_id == j[0]:
+                    self.links[i].remove(j)
         
     def add_barrier(self, start_level_id, barrier, end_level_id, color='k', ls='--', linewidth=1, ):
         
         self.ts_energies.append(barrier)       
         self.barriers[start_level_id].append((end_level_id, barrier, ls, linewidth, color))
         #print(self.barrier)
+        
+    def remove_barrier(self, start_level_id, end_level_id):
+        print(self.barriers)
+        for i, barrier in enumerate(self.barriers):
+            for j in barrier:        
+                if start_level_id == i and end_level_id == j[0]:
+                    self.barriers[i].remove(j)
+                    print('run this line')
+        print('\n after removing', self.barriers)
 
     def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title=''):
 
@@ -167,7 +183,8 @@ class EnergyDiagram:
                 start = level[1]*(self.dimension+self.space)
                 ax.text(start, level[0]+self.offset, str(ind),
                         horizontalalignment='right', color='red')
-
+        
+        #print(self.links)
         # add connection line
         for idx, link in enumerate(self.links):
             # here we connect the levels with the links
