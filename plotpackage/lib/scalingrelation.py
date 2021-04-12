@@ -15,7 +15,7 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO',title=''):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO', title=''):                
         print('scaling relation:')
         print('x axis' + '(' + xlabel + '): ', self.descriper1)
         print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
