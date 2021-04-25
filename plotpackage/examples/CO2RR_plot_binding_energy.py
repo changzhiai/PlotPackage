@@ -21,9 +21,9 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'fix2-paral' #Sheet1 by defaut
+sheet = 'overlayer' #Sheet1 by defaut
 min_row = 1 #1st column in excel
-max_row = 55 #9st column in excel
+max_row = 17 #9st column in excel
 
 #saved figure name
 figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
@@ -40,17 +40,13 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 # observationName = np.delete(observationName, del_list, 0)
 # X = np.delete(X, del_list, 0)
 
-# del_rows = [9,10,4]  #rows in excel
-# del_list = [x -2 for x in del_rows]
-# observationName = np.delete(observationName, del_list, 0)
-# X = np.delete(X, del_list, 0)
 
 # choose some rows
-# ranges = range(7,55,6)
-# #ranges = [3,15,7,5]
-# observationName = [observationName[i-2] for i in ranges]
-# selected_rows = [i-2 for i in ranges]
-# X = X[selected_rows,:]
+ranges = range(3,17,2)
+# ranges = [10,20,30]
+observationName = [observationName[i-2] for i in ranges]
+selected_rows = [i-2 for i in ranges]
+X = X[selected_rows,:]
 
 CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # #costom connection
