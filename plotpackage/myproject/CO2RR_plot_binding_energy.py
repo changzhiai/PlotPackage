@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'fix2-paral' #Sheet1 by defaut
+sheet = 'paral' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 55 #9st column in excel
 
@@ -45,12 +45,12 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 # observationName = np.delete(observationName, del_list, 0)
 # X = np.delete(X, del_list, 0)
 
-# choose some rows
-# ranges = range(7,55,6)
-# #ranges = [3,15,7,5]
-# observationName = [observationName[i-2] for i in ranges]
-# selected_rows = [i-2 for i in ranges]
-# X = X[selected_rows,:]
+#choose some rows
+ranges = range(2,55,6)
+#ranges = [3,15,7,5]
+observationName = [observationName[i-2] for i in ranges]
+selected_rows = [i-2 for i in ranges]
+X = X[selected_rows,:]
 
 CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # #costom connection
