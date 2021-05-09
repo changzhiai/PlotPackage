@@ -42,13 +42,13 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 # del_ele = ['Y', 'Zr', 'Ag', 'Sc', 'Mn', 'Zn', 'Cu', 'Nb', 'Mo', 'Ti', 'Ru']
 # del_ele = ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru']
 # # del_ele = ['Sc', 'Ag', 'Cu', 'Ti', 'Y', 'Zr', 'Zn']
-del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr', 'Cu', 'Ti', 'Nb', 'V']
-# del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr']
-del_rows = [observationName.index(each)+2 for each in del_ele]
-### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
-del_list = [x -2 for x in del_rows]
-observationName = np.delete(observationName, del_list, 0)
-X = np.delete(X, del_list, 0)
+# del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr', 'Cu', 'Ti', 'Nb', 'V']
+# # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr']
+# del_rows = [observationName.index(each)+2 for each in del_ele]
+# ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
+# del_list = [x -2 for x in del_rows]
+# observationName = np.delete(observationName, del_list, 0)
+# X = np.delete(X, del_list, 0)
 
 #choose some rows
 # # ranges = range(4,25,6) # choose one every 6 lines
@@ -72,10 +72,10 @@ CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
 # descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
 
-# col1 = [2, 2, 2, 3, 3, 5] #column in excel
-# col2 = [3, 5, 4, 5, 4, 4] #column in excel
-col1 = [6, 6, 6, 7, 7, 9] #column in excel
-col2 = [7, 9, 8, 9, 8, 8] #column in excel
+col1 = [2, 2, 2, 3, 3, 5] #column in excel
+col2 = [3, 5, 4, 5, 4, 4] #column in excel
+# col1 = [6, 6, 6, 7, 7, 9] #column in excel
+# col2 = [7, 9, 8, 9, 8, 8] #column in excel
 
 fig = plt.figure(figsize=(18, 16), dpi = 300)
 M  = 3
