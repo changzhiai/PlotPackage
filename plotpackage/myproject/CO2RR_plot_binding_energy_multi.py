@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 9 #5th column in excel
 
 #change it only for excel
-sheet = 'overly-new' #Sheet1 by defaut
+sheet = 'island-new' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 18 #9st column in excel
 
