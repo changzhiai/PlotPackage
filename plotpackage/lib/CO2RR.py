@@ -70,7 +70,7 @@ class CO2RRFEDplot:
         #add legend
         for specis in range(len(self.observationName)):
             plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= self.observationName[specis])
-        #plt.legend(fontsize=12)
+        plt.legend(fontsize=12)
         plt.title(title, fontsize=14)
         
         plt.show()

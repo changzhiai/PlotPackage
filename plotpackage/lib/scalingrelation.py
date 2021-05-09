@@ -27,7 +27,7 @@ class ScalingRelationPlot:
         # Otherwise register the axes and figure the user passed.
         else:
             self.ax = ax
-            self.fig = ax.figure
+            # self.fig = ax.figure
 
         #fig = plt.figure(figsize=(8, 6), dpi = 300)
         #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots

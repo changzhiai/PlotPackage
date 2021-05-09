@@ -21,9 +21,9 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'paral' #Sheet1 by defaut
+sheet = 'island-new' #Sheet1 by defaut
 min_row = 1 #1st column in excel
-max_row = 55 #9st column in excel
+max_row = 18 #9st column in excel
 
 #saved figure name
 figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
@@ -40,17 +40,17 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 # observationName = np.delete(observationName, del_list, 0)
 # X = np.delete(X, del_list, 0)
 
-# del_rows = [9,10,4]  #rows in excel
-# del_list = [x -2 for x in del_rows]
-# observationName = np.delete(observationName, del_list, 0)
-# X = np.delete(X, del_list, 0)
+del_rows = [10, 12, 13, 18]  #rows in excel
+del_list = [x -2 for x in del_rows]
+observationName = np.delete(observationName, del_list, 0)
+X = np.delete(X, del_list, 0)
 
 #choose some rows
-ranges = range(2,55,6)
-#ranges = [3,15,7,5]
-observationName = [observationName[i-2] for i in ranges]
-selected_rows = [i-2 for i in ranges]
-X = X[selected_rows,:]
+# ranges = range(4,25,6)
+# #ranges = [3,15,7,5]
+# observationName = [observationName[i-2] for i in ranges]
+# selected_rows = [i-2 for i in ranges]
+# X = X[selected_rows,:]
 
 CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # #costom connection
@@ -62,7 +62,7 @@ CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
 
 col1 = 3 #column in excel
-col2 = 4 #column in excel
+col2 = 5 #column in excel
 xcol = col1 - 2 
 ycol = col2 - 2
 descriper1 = (X[:, xcol]).astype(float) #step2-step1
