@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 9 #5th column in excel
 
 #change it only for excel
-sheet = 'island-new' #Sheet1 by defaut
+sheet = 'paral-new' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 18 #9st column in excel
 
@@ -34,16 +34,13 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 
 # # del rows
-# del_ele = ['Zn', 'Y', 'Zr']
-# del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo']
 # del_ele = ['Mn', 'Fe', 'Co', 'Zn', 'Y', 'Zr', 'Ag']  #delete according to element names in excel
-# del_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo']
-# del_ele = ['Cr', 'Fe', 'Mn']
-# del_ele = ['Y', 'Zr', 'Ag', 'Sc', 'Mn', 'Zn', 'Cu', 'Nb', 'Mo', 'Ti', 'Ru']
-# del_ele = ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru']
-# # del_ele = ['Sc', 'Ag', 'Cu', 'Ti', 'Y', 'Zr', 'Zn']
-# del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr', 'Cu', 'Ti', 'Nb', 'V']
-# # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr']
+# del_ele = ['Ag', 'Cu', 'Ti', 'Sc'] #remove distortion for island
+# del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] #del double bonds for island
+# del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for parallelogram
+# del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #del double bonds for parallelogram
+# del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr', 'Cu'] #remove distortion for overlayer
+# del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr'] #del double bonds for overlayer
 # del_rows = [observationName.index(each)+2 for each in del_ele]
 # ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
 # del_list = [x -2 for x in del_rows]
@@ -53,11 +50,10 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 #choose some rows
 # # ranges = range(4,25,6) # choose one every 6 lines
 # #ranges = [3,15,7,5]
-# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo']
-# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Fe',  'Nb', 'Mo', 'Ru']
-# selected_ele = ['V', 'Nb', 'Mo', 'Ni', 'Pd']
-# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Nb', 'Mo']
-# selected_ele = ['Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni']
+# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #select according to element names in excel
+# selected_ele = ['V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] # for island
+# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Nb', 'Mo'] #for parallelogram
+# selected_ele = ['Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni'] #for overlayer
 # ranges = [observationName.index(each)+2 for each in selected_ele]
 # observationName = [observationName[i-2] for i in ranges]
 # selected_rows = [i-2 for i in ranges]
