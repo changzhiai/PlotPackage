@@ -8,3 +8,5 @@ Created on Tue Mar 30 23:49:22 2021
 'to do list'
 
 '1. normalize plot style'
+
+'2. '
