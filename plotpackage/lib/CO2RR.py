@@ -26,8 +26,8 @@ class CO2RRFEDplot:
         print('auto loaded obserName: ', self.observationName)
         print('auto loaded data: \n', self.X)
         
-        self.colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown', \
-                          'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
+        self.colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'crimson', 'brown', \
+                          'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
                           'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
                           'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
