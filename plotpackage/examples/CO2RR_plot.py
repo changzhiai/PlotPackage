@@ -20,9 +20,9 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'doping-near-mag' #Sheet1 by defaut
+sheet = 'triangle' #Sheet1 by defaut
 min_row = 1 #1st column in excel
-max_row = 9 #9st column in excel
+max_row = 18 #9st column in excel
 
 #saved figure name
 figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name

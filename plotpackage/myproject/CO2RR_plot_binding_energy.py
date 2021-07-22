@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'island-new' #Sheet1 by defaut
+sheet = 'triangle' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 18 #9st column in excel
 
@@ -40,7 +40,8 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 # observationName = np.delete(observationName, del_list, 0)
 # X = np.delete(X, del_list, 0)
 
-del_rows = [10, 12, 13, 18]  #rows in excel
+#del_rows = [10, 12, 13, 18]  #rows in excel
+del_rows = []  #rows in excel
 del_list = [x -2 for x in del_rows]
 observationName = np.delete(observationName, del_list, 0)
 X = np.delete(X, del_list, 0)

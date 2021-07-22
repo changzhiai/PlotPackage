@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'overlayer' #Sheet1 by defaut
+sheet = 'triangle' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 17 #9st column in excel
 
