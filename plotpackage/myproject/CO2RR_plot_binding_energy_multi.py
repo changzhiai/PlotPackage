@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'overly-new' #Sheet1 by defaut
+sheet = 'line' #Sheet1 by defaut
 # min_row = 40 #1st column in excel
 # max_row = 57 #9st column in excel
 min_row = 1 #1st column in excel
@@ -44,7 +44,8 @@ del_ele = []
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #del double bonds for parallelogram
 # del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for overlayer
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr'] #del double bonds for overlayer
-del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr'] #remove distortion for triangle
+# del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr'] #remove distortion for triangle
+del_ele = ['Ag', 'Y'] #remove distortion for line
 del_rows = [observationName.index(each)+2 for each in del_ele]
 ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
 del_list = [x -2 for x in del_rows]
