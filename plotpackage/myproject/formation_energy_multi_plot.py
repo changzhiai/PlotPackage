@@ -16,12 +16,12 @@ min_col = 1 #1st column in excel
 max_col = 7 #5th column in excel
 
 #change it only for excel
-sheet = 'Formation Energy' #Sheet1 by defaut
+sheet = 'formation_energy' #Sheet1 by defaut
 min_row = 1 #1st column in excel
-max_row = 10 #9st column in excel
+max_row = 17 #9st column in excel
 
 #saved figure name
-figName1 = '../pictures/Formation_energy_' + sheet + '.jpg'  #free energy diagram name
+figName1 = '../pictures/Formation_energy_new_' + sheet + '.jpg'  #free energy diagram name
 
 ############ plot free energy diagram ###############
 colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g']
@@ -38,7 +38,7 @@ plt.legend(typeNames, framealpha=0.5, fontsize=12)
 plt.axhline(y=0, color='r', linestyle='--')
 
 # plt.xlim([-10, 8])
-plt.ylim([-1.6, 1])
+plt.ylim([-3, 2])
 plt.xlabel('Doping elements', fontsize=14)
 plt.ylabel('Formation energy (eV/atom)', fontsize=14)
 plt.title(sheet, fontsize=14)
