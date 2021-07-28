@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'triangle' #Sheet1 by defaut
+sheet = 'island-new' #Sheet1 by defaut
 # min_row = 20 #1st column in excel
 # max_row = 37 #9st column in excel
 min_row = 1 #1st column in excel
@@ -37,8 +37,8 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 
 # # del rows; delete according to element names in excel
-del_ele = []
-# del_ele = ['Y', 'Zr', 'Sc', 'Zn'] 
+# del_ele = []
+del_ele = ['Y', 'Zr', 'Sc', 'Zn'] 
 # del_ele = ['Ag', 'Cu', 'Ti', 'Sc'] #remove distortion for island
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] #del double bonds for island
 # del_ele = ['Zn', 'Y', 'Zr']
@@ -46,7 +46,7 @@ del_ele = []
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #del double bonds for parallelogram
 # del_ele = ['Sc', 'Zn', 'Y', 'Ag', 'Zr', 'Cu'] ##'Fe', 'Ni', 'Co' #remove distortion for overlayer
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr'] #del double bonds for overlayer
-del_ele = ['Y',] #remove distortion for triangle
+# del_ele = ['Y',] #remove distortion for triangle
 # del_ele = ['Ag', ] #remove distortion for line
 del_rows = [observationName.index(each)+2 for each in del_ele]
 ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel

@@ -21,11 +21,13 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'triangle' #Sheet1 by defaut
-# min_row = 40 #1st column in excel
-# max_row = 57 #9st column in excel
-min_row = 1 #1st column in excel
-max_row = 18 #9st column in excel
+sheet = 'island-new' #Sheet1 by defaut
+min_row = 40 #1st column in excel
+max_row = 57 #9st column in excel
+# min_row = 21 #1st column in excel
+# max_row = 38 #9st column in excel
+# min_row = 1 #1st column in excel
+# max_row = 18 #9st column in excel
 
 #saved figure name
 figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
@@ -36,15 +38,15 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 
 # # del rows; delete according to element names in excel
-del_ele = []
-# del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for island
+# del_ele = []
+del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for island
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] #del double bonds for island
 # del_ele = ['Zn', 'Y', 'V', 'Nb', 'Ti', 'Zr', 'Sc'] #remove distortion for parallelogram
 # del_ele = ['Zn', 'Y', 'Zr']
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #del double bonds for parallelogram
 # del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for overlayer
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Y', 'Zr'] #del double bonds for overlayer
-del_ele = ['Y',] #remove distortion for triangle
+# del_ele = ['Y',] #remove distortion for triangle
 # del_ele = ['Ag', ] #remove distortion for line
 del_rows = [observationName.index(each)+2 for each in del_ele]
 ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel

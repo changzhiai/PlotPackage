@@ -58,8 +58,10 @@ class ScalingRelationPlot:
         predict = np.poly1d(model)
         r2 = r2_score(self.descriper2, predict(self.descriper1))
         r2 = np.round(r2, 2)
+        m = np.round(m, 2)
+        b = np.round(b, 2)
         #plt.text(0.85, 0.3, 'R2 = {}'.format(r2), fontsize=14)
-        plt.legend(handles = handleFit, labels = ['$R^2$ = {}'.format(r2)], loc="lower right", handlelength=0, fontsize=14)
+        plt.legend(handles = handleFit, labels = ['$R^2$ = {}\ny = {} + {} * x '.format(r2, b, m)], loc="lower right", handlelength=0, fontsize=14)
         
         #save figure
         if save == True: 
