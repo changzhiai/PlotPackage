@@ -18,7 +18,7 @@ def scaling(EO, T):
     """
     beta = 1. / ( _kB * T ) 
     nu_0 = (_kB * T) / _h
-    print('nu_0', nu_0)
+    # print('nu_0', nu_0)
     # scaling relations
     EH  = 0.25 * EO + 0.07
     EOH = 0.45 * EO - 1.22
