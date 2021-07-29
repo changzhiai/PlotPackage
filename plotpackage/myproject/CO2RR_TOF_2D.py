@@ -128,8 +128,8 @@ ECO_d = {
 if __name__ == '__main__':
     T = 297.15
     N = 100
-    EHOCOs = np.linspace(-2, 0, N)
-    ECOs = np.linspace(-1, 1, N)
+    EHOCOs = np.linspace(-1, 2, N)
+    ECOs = np.linspace(-2, 1, N)
     # data from scaling
     r1s = np.empty(N)
     r2s = np.empty(N)
@@ -147,21 +147,23 @@ if __name__ == '__main__':
     metals = EHOCO_d.keys()
     rN_m = np.empty(len(metals))
     EHOCO_m = np.empty(len(metals))
-    for i,metal in enumerate(metals):
-        EHOCO_m[i] = EHOCO_d[metal]
-        rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T) )
+    # for i,metal in enumerate(metals):
+    #     EHOCO_m[i] = EHOCO_d[metal]
+    #     rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T))
     # plots
     import matplotlib.pyplot as plt
     fig = plt.figure(figsize=(8, 6), dpi = 300)
     ax = fig.add_subplot(111)
     X, Y = np.meshgrid(EHOCOs, ECOs)
-    # cp = ax.contourf(X, Y, r1_rds(X, Y, T)+r2_rds(X, Y, T)+r3_rds(X, Y, T))
-    cp = ax.contourf(X, Y, np.log10(22.2 * r1_rds(X, Y, T)))
+    # cp = ax.contourf(X, Y, np.log10(22.2 * (r1_rds(X, Y, T) + r2_rds(X, Y, T) + r3_rds(X, Y, T))))
+    cp = ax.contourf(X, Y, np.log10(22.2 * r2_rds(X, Y, T)))
     bar = fig.colorbar(cp) # Add a colorbar to a plot
     ax.set_title('Kinetic volcano for CO evolution')
     ax.set_xlabel('E(HOCO) (eV)')
     ax.set_ylabel('E(CO) (eV)')
     bar.set_label('$log_{10}(j/{\mu}Acm^{-2})$')
+    for i,metal in enumerate(metals):
+        plt.plot(EHOCO_d[metal], ECO_d[metal], 'o', color='black')  
     plt.show()
     
     # plt.figure(figsize=(8, 6), dpi = 100)

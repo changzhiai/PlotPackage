@@ -59,8 +59,8 @@ def scaling(EHOCO, T):
     # k2 = nu_0 * np.exp( - _Sg / _kB ) * np.exp(- beta * Ea2)
     k1 = A_prime  * np.exp(- beta * b * DG1) # rate with entropy loss
     k2 = A_prime  * np.exp(- beta * b * DG2)
-    # k3 = A_prime  * np.exp(- beta * b * DG3)
-    k3 = 10**13 * np.exp(- beta * ECO)
+    k3 = A_prime  * np.exp(- beta * b * DG3)
+    # k3 = 10**13 * np.exp(- beta * ECO)
 
     return np.array([k1, k2, k3]), np.array([K1, K2, K3])
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
         r3s[i] = r3_rds(EHOCO, T)     # (3) happens once for every H2O formed
         rmin[i] = min(r1s[i], r2s[i], r3s[i])
     
-    print(r1s)
+    # print(r1s)
     # data for the elements
     metals = EHOCO_d.keys()
     rN_m = np.empty(len(metals))
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     if 1:  # Plot volcano?
         plt.semilogy(EHOCOs, r3s, '--r', label='(3) RDS')
         plt.semilogy(EHOCOs, rmin,'-b', label='min(rate)')
-        print(EHOCO_m, rN_m)
+        # print(EHOCO_m, rN_m)
         for EHOCO, rN, metal in zip(EHOCO_m, rN_m, metals):
             plt.plot(EHOCO, rN, 'ok')
             # plt.text(EHOCO, rN, metal)
