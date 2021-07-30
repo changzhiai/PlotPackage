@@ -79,7 +79,7 @@ def r2_rds(EHOCO, ECO, T, **ps):
     return r2
 
 def r3_rds(EHOCO, ECO, T, **ps):
-    pCO = ps.get('CO', 0.055)
+    pCO = ps.get('CO', 1)
     pCO2 = ps.get('CO2', 1.)
     ks, Ks = scaling(EHOCO, ECO, T)
     r3 = ks[2] * 1/9 - ks[2]/Ks[2] * 7/9 * pCO
@@ -129,19 +129,18 @@ if __name__ == '__main__':
     T = 297.15
     N = 100
     EHOCOs = np.linspace(-1, 2, N)
-    ECOs = np.linspace(-2, 1, N)
+    ECOs = np.linspace(-2, -1, N)
     # data from scaling
-    r1s = np.empty(N)
-    r2s = np.empty(N)
-    r3s = np.empty(N)
-    rmin = np.empty(N)
+    r1s = np.empty((N,N))
+    r2s = np.empty((N,N))
+    r3s = np.empty((N,N))
+    rmin = np.empty((N,N))
     for i, EHOCO in enumerate(EHOCOs):
-        for i, ECO in enumerate(ECOs):
-            r1s[i] = r1_rds(EHOCO, ECO, T)     # (1) happens once for every H2O formed
-            r2s[i] = r2_rds(EHOCO, ECO, T) # (2) happens once for every 2 H2O formed
-            r3s[i] = r3_rds(EHOCO, ECO, T)     # (3) happens once for every H2O formed
-            rmin[i] = min(r1s[i], r2s[i], r3s[i])
-    
+        for j, ECO in enumerate(ECOs):
+            r1s[i][j] = r1_rds(EHOCO, ECO, T)     # (1) happens once for every H2O formed
+            r2s[i][j] = r2_rds(EHOCO, ECO, T) # (2) happens once for every 2 H2O formed
+            r3s[i][j] = r3_rds(EHOCO, ECO, T)     # (3) happens once for every H2O formed
+            rmin[i][j] = min(r1s[i][j], r2s[i][j], r3s[i][j])
     # print(r1s)
     # data for the elements
     metals = EHOCO_d.keys()
@@ -149,14 +148,17 @@ if __name__ == '__main__':
     EHOCO_m = np.empty(len(metals))
     # for i,metal in enumerate(metals):
     #     EHOCO_m[i] = EHOCO_d[metal]
-    #     rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T))
+    #     print(rN_m)
+    #     rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T), r3_rds(EHOCO_d[metal], ECO_d[metal], T))
     # plots
     import matplotlib.pyplot as plt
     fig = plt.figure(figsize=(8, 6), dpi = 300)
     ax = fig.add_subplot(111)
-    X, Y = np.meshgrid(EHOCOs, ECOs)
+    # X, Y = np.meshgrid(EHOCOs, ECOs)
+    print(r3s)
     # cp = ax.contourf(X, Y, np.log10(22.2 * (r1_rds(X, Y, T) + r2_rds(X, Y, T) + r3_rds(X, Y, T))))
-    cp = ax.contourf(X, Y, np.log10(22.2 * r2_rds(X, Y, T)))
+    cp = ax.contourf(EHOCOs, ECOs,  np.log10(22.2 * r2s))
+    # cp = ax.contourf(EHOCOs, ECOs, rmin)
     bar = fig.colorbar(cp) # Add a colorbar to a plot
     ax.set_title('Kinetic volcano for CO evolution')
     ax.set_xlabel('E(HOCO) (eV)')

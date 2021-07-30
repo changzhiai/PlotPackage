@@ -59,8 +59,8 @@ def scaling(EHOCO, T):
     # k2 = nu_0 * np.exp( - _Sg / _kB ) * np.exp(- beta * Ea2)
     k1 = A_prime  * np.exp(- beta * b * DG1) # rate with entropy loss
     k2 = A_prime  * np.exp(- beta * b * DG2)
-    k3 = A_prime  * np.exp(- beta * b * DG3)
-    # k3 = 10**13 * np.exp(- beta * ECO)
+    # k3 = A_prime  * np.exp(- beta * b * DG3)
+    k3 = 10**13 * np.exp(- beta * ECO)
 
     return np.array([k1, k2, k3]), np.array([K1, K2, K3])
 
@@ -119,7 +119,7 @@ if __name__ == '__main__':
         r2s[i] = r2_rds(EHOCO, T) # (2) happens once for every 2 H2O formed
         r3s[i] = r3_rds(EHOCO, T)     # (3) happens once for every H2O formed
         rmin[i] = min(r1s[i], r2s[i], r3s[i])
-    
+    print(r1s)
     # print(r1s)
     # data for the elements
     metals = EHOCO_d.keys()
