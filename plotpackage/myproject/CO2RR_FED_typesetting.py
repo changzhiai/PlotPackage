@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug  4 12:29:10 2021
+Created on Wed Aug  4 15:34:30 2021
 
 @author: changai
 """
@@ -16,7 +16,7 @@ from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = '../data/binding_energy.xlsx'
+filename = '../data/CO2RR.xlsx'
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
@@ -59,6 +59,7 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     elif types == 'overly-new':
         del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
         
+
     del_rows = [observationName.index(each)+2 for each in del_ele]
     ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
     del_list = [x - 2 for x in del_rows]
@@ -67,11 +68,59 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     
     M  = 3
     ax = plt.subplot(3, 3, i + 1)
+    
     descriper1 = (X[:, col1]).astype(float) 
     descriper2 = (X[:, col2]).astype(float) 
-    sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)   
-    sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
+    # sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)   
+    # sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
+    
+    CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
+    CO2RRdiagram.plot(ax = ax, title='', save=False, legandSize = 9.5, text = text[i], ratio=1.4)
     
     i = i +1
     
 plt.show()
+#choose some rows
+# # ranges = range(4,25,6) # choose one every 6 lines
+# #ranges = [3,15,7,5]
+# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #select according to element names in excel
+# selected_ele = ['V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] # for island
+# selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Nb', 'Mo'] #for parallelogram
+# selected_ele = ['Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni'] #for overlayer
+# ranges = [observationName.index(each)+2 for each in selected_ele]
+# observationName = [observationName[i-2] for i in ranges]
+# selected_rows = [i-2 for i in ranges]
+# X = X[selected_rows,:]
+
+# CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
+# #costom connection
+# CO2RRdiagram.add_link(start_id=0, end_id=3)
+# CO2RRdiagram.remove_link(start_id=0, end_id=1)
+#CO2RRdiagram.plot(title=sheet)
+
+# descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
+# descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
+
+# col1 = [2, 2, 2, 3, 3, 5] #column in excel
+# col2 = [3, 5, 4, 5, 4, 4] #column in excel
+# col1 = [6, 6, 6, 7, 7, 9] #column in excel
+# col2 = [7, 9, 8, 9, 8, 8] #column in excel
+
+# fig = plt.figure(figsize=(18, 16), dpi = 300)
+# M  = 3
+# i = 0
+# for m1 in range(M-1):
+#     for m2 in range(M):
+#         ax = plt.subplot(M, M, m1*M + m2 + 1)
+#         descriper1 = (X[:, 0]).astype(float) #step2-step1
+#         descriper2 = (X[:, 1]).astype(float) #step3-step4
+#         sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)
+        
+#         sr.plot(ax = ax, save=False, title=sheet, xlabel=stepsNames[xcol], ylabel=stepsNames[ycol])
+#         i+=1
+# plt.show()
+
+#add metadata into pictures
+# figNames = [figName1, figName2]
+# fmd = FigsMetaData(figNames, filename, sheet, min_col, max_col, min_row, max_row)
+# fmd.add_metadata()

@@ -8,6 +8,7 @@ Created on Sun Mar 14 00:31:10 2021
 from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.freeenergy import EnergyDiagram
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
 
 class CO2RRFEDplot:
     def __init__(self, stepsnames, obsername, X_, figname):
@@ -17,8 +18,8 @@ class CO2RRFEDplot:
         self.X = X_
         self.figName = figname
         
-        self.axFree = None
-        self.figFree = None
+        # self.axFree = None
+        # self.figFree = None
         
         #self.stepsNames, self.observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
         #self.stepsNames, self.observationName, X = read_csv(filename, , min_col, max_col) #load csv data
@@ -30,6 +31,7 @@ class CO2RRFEDplot:
                           'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
                           'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
                           'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
+        self.colorList = {'Ti': 'red', 'Pd': 'black', 'Sc': 'gray', 'V': 'red', 'Mn': 'brown', 'Fe': 'saddlebrown', 'Co': 'darkorange', 'Ni': 'tan', 'Cu': 'darkgoldenrod', 'Zn': 'darkkhaki', 'Y': 'oliver', 'Zr': 'darkolivegreen', 'Nb': 'lightgreen', 'Mo': 'green', 'Ru': 'lightseagreen', 'Rh': 'teal', 'Ag': 'cyan'}
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
@@ -60,18 +62,27 @@ class CO2RRFEDplot:
         if start_id != None and end_id != None:
             self.diagram.remove_link(start_id, end_id)
     
-    def plot(self, title=''):
-        figFree = plt.figure(figsize=(8,6), dpi = 300)
-        axFree = figFree.add_subplot(111)
+    def plot(self, ax: plt.Axes = None, title='', save = False, legandSize = 14, text='', ratio=1.6181):
+        if not ax:
+            figFree = plt.figure(figsize=(8, 6), dpi = 300)
+            axFree = figFree.add_subplot(111)
+        # Otherwise register the axes and figure the user passed.
+        else:
+            axFree = ax
+            # self.fig = ax.figure
            
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree) # this is the default ylabel
+        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio) # this is the default ylabel
         
-        #add legend
+        # add legend
         for specis in range(len(self.observationName)):
             plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= self.observationName[specis])
-        plt.legend(fontsize=12)
+        plt.legend(fontsize=legandSize)
         plt.title(title, fontsize=14)
-        
-        plt.show()
-        figFree.savefig(self.figName)
+        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14)        
+        axFree.yaxis.set_label_coords(-0.1, 0.5)
+        axFree.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+        #save figure
+        if save == True: 
+            plt.show()
+            figFree.savefig(self.figName)

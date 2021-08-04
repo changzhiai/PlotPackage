@@ -15,7 +15,7 @@ from scipy.interpolate import interp1d
 class EnergyDiagram:
     def __init__(self, aspect='equal'):
         # plot parameters
-        self.ratio = 1.6181 #1.5
+        # self.ratio = 1.6181 #1.5
         self.dimension = 'auto'
         self.space = 'auto'
         self.offset = 'auto'
@@ -37,7 +37,7 @@ class EnergyDiagram:
         self.all_energies = []
         
         # matplotlib fiugre handlers
-        self.fig = None
+        # self.fig = None
         self.ax = None
         self.label = []   
 
@@ -99,8 +99,8 @@ class EnergyDiagram:
                     print('run this line')
         print('\n after removing', self.barriers)
 
-    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title=''):
-
+    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title='', ratio=1.6181):
+        self.ratio = ratio
         # Create a figure and axis if the user didn't specify them.
         if not ax:
             fig = plt.figure(figsize=(8,6), dpi = 300)
@@ -108,7 +108,7 @@ class EnergyDiagram:
         # Otherwise register the axes and figure the user passed.
         else:
             self.ax = ax
-            self.fig = ax.figure
+            # self.fig = ax.figure
             # Constrain the target axis to have the proper aspect ratio
             self.ax.set_aspect(self.aspect)
 
