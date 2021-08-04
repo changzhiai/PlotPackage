@@ -146,10 +146,7 @@ if __name__ == '__main__':
     metals = EHOCO_d.keys()
     rN_m = np.empty(len(metals))
     EHOCO_m = np.empty(len(metals))
-    # for i,metal in enumerate(metals):
-    #     EHOCO_m[i] = EHOCO_d[metal]
-    #     print(rN_m)
-    #     rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T), r3_rds(EHOCO_d[metal], ECO_d[metal], T))
+ 
     # plots
     import matplotlib.pyplot as plt
     fig = plt.figure(figsize=(8, 6), dpi = 300)

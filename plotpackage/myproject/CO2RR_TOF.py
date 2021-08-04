@@ -22,17 +22,12 @@ def scaling(EHOCO, T):
     as function of the EO descriptor and temperature T.
     """
     beta = 1. / ( _kB * T )
-    # nu_0 = (_kB * T) / _h
-    # Ea1 = 0
-    # Ea2 = 0
-    # Ea3 = 0
+
     A_prime = 3.6 * 10**4
     b = 0.5
     
     # scaling relations
     ECO = 0.67 * EHOCO - 1.06 #island
-    # EH  = 0.25 * EO + 0.07
-    # EOH = 0.45 * EO - 1.22
     
     # reaction energies
     DE1 = EHOCO

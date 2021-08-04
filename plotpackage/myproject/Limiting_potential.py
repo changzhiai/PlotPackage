@@ -24,18 +24,6 @@ def scaling(EHOCO, ECO, T):
     """ Calculate forward rate constants and equilibrium constants 
     as function of the EO descriptor and temperature T.
     """
-    # beta = 1. / ( _kB * T )
-    # nu_0 = (_kB * T) / _h
-    # Ea1 = 0
-    # Ea2 = 0
-    # Ea3 = 0
-    # A_prime = 3.6 * 10**4
-    # b = 0.5
-    
-    # scaling relations
-    # ECO = 0.67 * EHOCO - 1.06 #island
-    # EH  = 0.25 * EO + 0.07
-    # EOH = 0.45 * EO - 1.22
     
     # reaction energies
     DE1 = EHOCO
@@ -43,53 +31,9 @@ def scaling(EHOCO, ECO, T):
     DE3 = -ECO
     # limiting_potenital = max(DE1, DE2, DE3)
     limiting_potenital = max(DE1/(-1), DE2/(-1), DE3/(-1)) 
-    # # Reaction free energies
-    # DG1 = DE1 + T * _Sg
-    # DG2 = DE2 - T * _Sg
-    # DG3 = DE3 + T * _Sg
 
-    # # Equilibrium constants
-    # K1 = np.exp( - beta * DG1 )
-    # K2 = np.exp( - beta * DG2 )
-    # K3 = np.exp( - beta * DG3 )
-
-    # # activation barriers from scaling
-    # # Ea1 = max(DE1, 0)
-    # # Ea2 = max(0.81 * DE2 + 1.95, DE2, 0)
-    # # Ea3 = max(0.22 * DE3 + 1.11, DE3, 0)
-    # # Ea4 = max(DE4, 0)
-    # #print(EO, Ea1, Ea2, Ea3, Ea4)
-    # # k1 = nu_0 * np.exp( - _Sg / _kB ) * np.exp(- beta * Ea1) # rate with entropy loss
-    # # k2 = nu_0 * np.exp( - _Sg / _kB ) * np.exp(- beta * Ea2)
-    # k1 = A_prime  * np.exp(- beta * b * DG1) # rate with entropy loss
-    # k2 = A_prime  * np.exp(- beta * b * DG2)
-    # # k3 = A_prime  * np.exp(- beta * b * DG3)
-    # k3 = 10**13 * np.exp(- beta * ECO)
-
-    # return np.array([k1, k2, k3]), np.array([K1, K2, K3])
-    # return  np.array([limiting_potenital])
     return limiting_potenital
-# print(scaling(1., -1., 300))
-# def r1_rds(EHOCO, ECO, T, **ps):
-#     pCO = ps.get('CO', 0.055)
-#     pCO2 = ps.get('CO2', 1.)
-#     ks, Ks = scaling(EHOCO, ECO, T)
-#     r1 = ks[0] * 7/9 * pCO2 - ks[0]/Ks[0] * 1/9
-#     return r1
 
-# def r2_rds(EHOCO, ECO, T, **ps):
-#     pCO = ps.get('CO', 0.055)
-#     pCO2 = ps.get('CO2', 1.)
-#     ks, Ks = scaling(EHOCO, ECO, T)
-#     r2 = ks[1] * 1/9 - ks[1]/Ks[1] * 1/9
-#     return r2
-
-# def r3_rds(EHOCO, ECO, T, **ps):
-#     pCO = ps.get('CO', 1)
-#     pCO2 = ps.get('CO2', 1.)
-#     ks, Ks = scaling(EHOCO, ECO, T)
-#     r3 = ks[2] * 1/9 - ks[2]/Ks[2] * 7/9 * pCO
-#     return r3
 
 EHOCO_d = {
     "Pd": 0.42967678,
@@ -137,31 +81,23 @@ if __name__ == '__main__':
     EHOCOs = np.linspace(-1, 2, N)
     ECOs = np.linspace(-2, 0, N)
     # data from scaling
-    l1 = np.empty((N,N))
-    l2 = np.empty((N,N))
-    l3 = np.empty((N,N))
-    lmin = np.empty((N,N))
+    limit = np.empty((N,N))
+
     for i, EHOCO in enumerate(EHOCOs):
         for j, ECO in enumerate(ECOs):
-            l1[i][j] = scaling(EHOCO, ECO, T) # (2) happens once for every 2 H2O formed
-            # l3[i][j] = scaling(EHOCO, ECO, T)     # (3) happens once for every H2O formed
-            # lmin[i][j] = min(l1[i][j], l2[i][j], l3[i][j])
-    # print(r1s)
+            limit[i][j] = scaling(EHOCO, ECO, T) 
+
     # data for the elements
     metals = EHOCO_d.keys()
     rN_m = np.empty(len(metals))
     EHOCO_m = np.empty(len(metals))
-    # for i,metal in enumerate(metals):
-    #     EHOCO_m[i] = EHOCO_d[metal]
-    #     print(rN_m)
-    #     rN_m[i] = min(r1_rds(EHOCO_d[metal], ECO_d[metal], T), r2_rds(EHOCO_d[metal], ECO_d[metal], T), r3_rds(EHOCO_d[metal], ECO_d[metal], T))
+   
     # plots
     import matplotlib.pyplot as plt
     fig = plt.figure(figsize=(8, 6), dpi = 300)
     ax = fig.add_subplot(111)
-    # X, Y = np.meshgrid(EHOCOs, ECOs)
-    # cp = ax.contourf(X, Y, np.log10(22.2 * (r1_rds(X, Y, T) + r2_rds(X, Y, T) + r3_rds(X, Y, T))))
-    cp = ax.contourf(EHOCOs, ECOs,  l1)
+
+    cp = ax.contourf(EHOCOs, ECOs,  limit)
     # cp = ax.contourf(EHOCOs, ECOs, r1s)
     bar = fig.colorbar(cp) # Add a colorbar to a plot
     ax.set_title('Kinetic volcano for CO evolution')
@@ -172,21 +108,3 @@ if __name__ == '__main__':
         plt.plot(EHOCO_d[metal], ECO_d[metal], 'o', color='black')
         plt.annotate(metal, (EHOCO_d[metal], ECO_d[metal]+0.005), fontsize=12, horizontalalignment='center', verticalalignment='bottom')
     plt.show()
-    # plt.figure(figsize=(8, 6), dpi = 100)
-    # plt.semilogy(EHOCOs, r1s, '--k', label='(1) RDS')
-    # plt.semilogy(EHOCOs, r2s, '--g', label='(2) RDS')
-    # plt.xlabel(r'$\Delta E_{\mathrm{HOCO*}}$ (eV)')
-    # plt.ylabel('T.O.F. (s$^{-1}$)')
-    # plt.ylim([0.1, np.exp(40)])
-    # plt.legend(loc=2)
-    # plt.savefig('H2ox_sabatier.png')
-    # if 1:  # Plot volcano?
-    #     plt.semilogy(EHOCOs, r3s, '--r', label='(3) RDS')
-    #     plt.semilogy(EHOCOs, rmin,'-b', label='min(rate)')
-    #     print(EHOCO_m, rN_m)
-    #     for EHOCO, rN, metal in zip(EHOCO_m, rN_m, metals):
-    #         plt.plot(EHOCO, rN, 'ok')
-    #         # plt.text(EHOCO, rN, metal)
-    #     plt.legend(loc=2)
-    #     plt.savefig('H2ox_sabatier_metals.png')
-    # plt.show()

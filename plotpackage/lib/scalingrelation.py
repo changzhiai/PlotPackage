@@ -5,6 +5,7 @@ Created on Sun Mar 14 01:06:31 2021
 @author: changai
 """
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
 import numpy as np
 
 class ScalingRelationPlot:
@@ -15,7 +16,7 @@ class ScalingRelationPlot:
         self.observationName = obsername
         self.figName = figname
         
-    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO', title=''):                
+    def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO', title='', text=''):                
         print('scaling relation:')
         print('x axis' + '(' + xlabel + '): ', self.descriper1)
         print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
@@ -34,9 +35,11 @@ class ScalingRelationPlot:
         plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
         plt.xlabel(xlabel, fontsize=14)
         plt.ylabel(ylabel, fontsize=14)
+        ax.yaxis.set_label_coords(-0.12, 0.5)
+        ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
         plt.margins(y=0.08)
         plt.title(title, fontsize=14)
-        
+        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14)        
         #get current axis object and change format
         #ax = fig.gca()
         ax.tick_params(labelsize=12) #tick label font size

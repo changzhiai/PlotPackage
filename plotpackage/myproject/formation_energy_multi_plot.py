@@ -16,7 +16,8 @@ min_col = 1 #1st column in excel
 max_col = 7 #5th column in excel
 
 #change it only for excel
-sheet = 'formation_energy' #Sheet1 by defaut
+sheet = 'Selectivity' #Sheet1 by defaut
+# sheet = 'Formation Energy' #Sheet1 by defaut
 min_row = 1 #1st column in excel
 max_row = 17 #9st column in excel
 
@@ -40,7 +41,8 @@ plt.axhline(y=0, color='r', linestyle='--')
 # plt.xlim([-10, 8])
 plt.ylim([-3, 2])
 plt.xlabel('Doping elements', fontsize=14)
-plt.ylabel('Formation energy (eV/atom)', fontsize=14)
+# plt.ylabel('Formation energy (eV/atom)', fontsize=14)
+plt.ylabel('ΔG(HOCO*)-ΔG(H*)', fontsize=14)
 plt.title(sheet, fontsize=14)
 ax = fig.gca()
 ax.set_xticks(x)
