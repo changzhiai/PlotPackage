@@ -100,7 +100,7 @@ if __name__ == '__main__':
     cp = ax.contourf(EHOCOs, ECOs,  limit)
     # cp = ax.contourf(EHOCOs, ECOs, r1s)
     bar = fig.colorbar(cp) # Add a colorbar to a plot
-    ax.set_title('Kinetic volcano for CO evolution')
+    ax.set_title('Limiting potential')
     ax.set_xlabel('E(HOCO) (eV)')
     ax.set_ylabel('E(CO) (eV)')
     bar.set_label('Limiting potential (V)')

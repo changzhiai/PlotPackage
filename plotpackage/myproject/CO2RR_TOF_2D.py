@@ -17,6 +17,12 @@ E_H2g = -7.158 # eV
 E_H2Og = -12.833 # eV
 E_COg = -12.118 # eV
 
+# theta_star = 7/9
+theta_COOH = 1/9
+theta_CO = 1/9
+
+theta_star = 1 - theta_COOH - theta_CO
+
 def scaling(EHOCO, ECO, T):
     """ Calculate forward rate constants and equilibrium constants 
     as function of the EO descriptor and temperature T.
@@ -68,21 +74,21 @@ def r1_rds(EHOCO, ECO, T, **ps):
     pCO = ps.get('CO', 0.055)
     pCO2 = ps.get('CO2', 1.)
     ks, Ks = scaling(EHOCO, ECO, T)
-    r1 = ks[0] * 7/9 * pCO2 - ks[0]/Ks[0] * 1/9
+    r1 = ks[0] * theta_star * pCO2 - ks[0]/Ks[0] * theta_COOH
     return r1
 
 def r2_rds(EHOCO, ECO, T, **ps):
     pCO = ps.get('CO', 0.055)
     pCO2 = ps.get('CO2', 1.)
     ks, Ks = scaling(EHOCO, ECO, T)
-    r2 = ks[1] * 1/9 - ks[1]/Ks[1] * 1/9
+    r2 = ks[1] * theta_COOH - ks[1]/Ks[1] * theta_CO
     return r2
 
 def r3_rds(EHOCO, ECO, T, **ps):
     pCO = ps.get('CO', 1)
     pCO2 = ps.get('CO2', 1.)
     ks, Ks = scaling(EHOCO, ECO, T)
-    r3 = ks[2] * 1/9 - ks[2]/Ks[2] * 7/9 * pCO
+    r3 = ks[2] * theta_CO - ks[2]/Ks[2] * theta_star * pCO
     return r3
 
 EHOCO_d = {

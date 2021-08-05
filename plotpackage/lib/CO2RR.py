@@ -27,11 +27,11 @@ class CO2RRFEDplot:
         print('auto loaded obserName: ', self.observationName)
         print('auto loaded data: \n', self.X)
         
-        self.colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'crimson', 'brown', \
-                          'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
-                          'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
-                          'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
-        self.colorList = {'Ti': 'red', 'Pd': 'black', 'Sc': 'gray', 'V': 'red', 'Mn': 'brown', 'Fe': 'saddlebrown', 'Co': 'darkorange', 'Ni': 'tan', 'Cu': 'darkgoldenrod', 'Zn': 'darkkhaki', 'Y': 'oliver', 'Zr': 'darkolivegreen', 'Nb': 'lightgreen', 'Mo': 'green', 'Ru': 'lightseagreen', 'Rh': 'teal', 'Ag': 'cyan'}
+        # self.colorList = ['k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'crimson', 'brown', \
+        #                   'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
+        #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
+        #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
+        self.colorList = {'Ti': 'red', 'Pd': 'black', 'Sc': 'blue', 'V': 'orange', 'Mn': 'green', 'Fe': 'purple', 'Co': 'deepskyblue', 'Ni': 'pink', 'Cu': 'lightgray', 'Zn': 'olive', 'Y': 'cyan', 'Zr': 'lime', 'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen'}
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
@@ -40,16 +40,17 @@ class CO2RRFEDplot:
         print('reload:', self.stepsNames)
         print('reload:', self.observationName, '\n')
         
-        
         self.diagram = EnergyDiagram()
         count = 0
-        for specis in range(len(self.observationName)):
+        for i, specis in enumerate(self.observationName):
             for step in range(len(self.stepsNames)):
+        # for specis in range(len(self.observationName)):
+        #     for step in range(len(self.stepsNames)):
                 count += 1
                 if step == 0:
                     self.diagram.pos_number = 0
-                    
-                self.diagram.add_level(self.X[specis][step], color = self.colorList[specis])
+                
+                self.diagram.add_level(self.X[i][step], color = self.colorList[specis])
         
                 if count % (len(self.stepsNames)) != 0:
                     self.diagram.add_link(count-1, count, color = self.colorList[specis])
@@ -75,11 +76,12 @@ class CO2RRFEDplot:
         pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio) # this is the default ylabel
         
         # add legend
-        for specis in range(len(self.observationName)):
-            plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= self.observationName[specis])
+        # for specis in range(len(self.observationName)):
+        for i, specis in enumerate(self.observationName):
+            plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= specis)
         plt.legend(fontsize=legandSize)
         plt.title(title, fontsize=14)
-        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14)        
+        plt.text(0.04, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14)        
         axFree.yaxis.set_label_coords(-0.1, 0.5)
         axFree.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
         #save figure
