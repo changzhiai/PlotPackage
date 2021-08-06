@@ -18,8 +18,8 @@ E_H2Og = -12.833 # eV
 E_COg = -12.118 # eV
 
 # theta_star = 7/9
-theta_COOH = 1/9
-theta_CO = 1/9
+theta_COOH = 0.8
+theta_CO = 0.2
 
 theta_star = 1 - theta_COOH - theta_CO
 
