@@ -399,19 +399,19 @@ if __name__ == '__main__':
         for j, E_CO in enumerate(E_CO_e):
             for i, E_COOH in enumerate(E_COOH_e):
                 k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_COOH, E_CO, U, T=T0)
-                #rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
-                rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
+                rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+                # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
                 thetas, rates = rm.solve()
                 rate = min(jmax, rates[0])
                 rate = max(jmin, rate)
                 R[i,j] = np.log10(rate)
                 Thetas[i,j,:] = thetas        
-        from pylabdefaults_square import *
+        # from pylabdefaults_square import *
         import pylab as pl
         f2 = pl.figure(1)
         pl.clf()
         pl.subplots_adjust(left=.16, bottom=.16, right=.96, top=.90)
-        pl.hold(1)
+        # pl.hold(1)
         pl.contourf(E_CO_e, E_COOH_e, R, contours, cmap=pl.cm.jet)
         E_COOH_scaling = COOH_CO_scaling(E_CO_e)
         pl.plot(E_CO_e, E_COOH_scaling,'-k', lw=1)
@@ -430,7 +430,7 @@ if __name__ == '__main__':
                     if 1: #surface_name[:-3] == 'Au3Cd':
                         if 1:
                             k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, energies['Eads_COOH'], energies['Eads_CO'], U, T=T0)
-                            #rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+                            # rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
                             rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
                             thetas, rates = rm.solve()
                             print(surface_name, rates[0])
