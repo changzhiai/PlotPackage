@@ -402,6 +402,7 @@ if __name__ == '__main__':
                 rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
                 # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
                 thetas, rates = rm.solve()
+                print(rates)
                 rate = min(jmax, rates[0])
                 rate = max(jmin, rate)
                 R[i,j] = np.log10(rate)
@@ -418,7 +419,7 @@ if __name__ == '__main__':
         for i in range(N_sel): # elements
             pl.text(E_CO_sel[i], E_COOH_sel[i], texts[i], 
                     ha='center', va='center')
-        if 1: # plot result from screening
+        if 0: # plot result from screening
             import pickle
             data = pickle.load(open('COOH_CO_data.pickle','r'))
             for surface_name, energies in data.items():
