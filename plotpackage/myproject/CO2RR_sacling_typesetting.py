@@ -31,7 +31,7 @@ text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 # col1 = [2, 2, 2, 3, 3, 5] #column in excel
 # col2 = [3, 5, 4, 5, 4, 4] #column in excel
 col1=2 # column in excel
-col2=5 # column in excel
+col2=3 # column in excel
 col1 = col1 - 2
 col2 = col2 - 2
 for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-new']:
@@ -55,7 +55,7 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     elif types == 'paral-new':
         del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for line
     elif types == 'island-new':
-        del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for line
+        del_ele = ['Y', 'Zr',  'Zn'] #remove distortion for line
     elif types == 'overly-new':
         del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
         

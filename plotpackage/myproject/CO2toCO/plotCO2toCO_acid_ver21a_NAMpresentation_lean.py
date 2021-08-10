@@ -47,7 +47,7 @@ T0 = 18.0 + 273.15
 tof2j = 222 *.05 * 2 # convert TOF (site/s) to j (micro A / cm2) (220 from Au(111) surface charge densty, 5% steps, 2e process) 
 tof2j_CODH = 2 * 2 * 0.46e-12 * 6.022e23 * 1.602e-19 * 1e6 # convert TOF to j (micro A/cm2) from 0.46 pmol / cm2
 
-print(tof2j, tof2j_CODH)
+# print(tof2j, tof2j_CODH)
 
 nu_e_0 = kB * T0 / hplanck
 nu_c_0 = 1.e13
@@ -359,7 +359,7 @@ if __name__ == '__main__':
     #cHp0  = 1.e-7
     #cOHm0 = 1.e-14
     #cHp0 = 1.    
-    if 0: # test K1, K2, K3 using Cu(211) as an example
+    if 1: # test K1, K2, K3 using Cu(211) as an example
         E_COOH = 0.3155624
         E_CO = - 0.6758434 # CO ads energy
         #E_CO = - 0.3 # CO ads energy
@@ -375,7 +375,7 @@ if __name__ == '__main__':
         print(ddG_COOH, ddG_CO, -ddG_COads)
         print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
         print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
-    if 1: # 2d volcano 
+    if 0: # 2d volcano 
         U = U0 + UHER0
         nu_c = nu_c_0 #1e14
         nu_e = nu_e_0 #1.e8
@@ -402,7 +402,7 @@ if __name__ == '__main__':
                 rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
                 # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
                 thetas, rates = rm.solve()
-                print(rates)
+                # print(rates)
                 rate = min(jmax, rates[0])
                 rate = max(jmin, rate)
                 R[i,j] = np.log10(rate)
@@ -442,5 +442,5 @@ if __name__ == '__main__':
         pl.title(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
         pl.xlabel(r'$E_{\mathrm{CO}}$ (eV)')
         pl.ylabel(r'$E_{\mathrm{COOH}}$ (eV)')
-        pl.savefig(prefix+'CO2toCO_rate_vs_COOH_CO.png', dpi=300)
+        # pl.savefig(prefix+'CO2toCO_rate_vs_COOH_CO.png', dpi=300)
         pl.show()
