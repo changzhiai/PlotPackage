@@ -31,7 +31,7 @@ nu_c = 1.e13
 cHp0 = 10.**(-0.)
 UHER0 = URHE0 = kB * T0 * np.log(cHp0)   # introduced to shift the plotted potential window to the relevant range w
 
-U0 = -0.4 # applied potential vs. she
+U0 = -0.3 # applied potential vs. she
 U = U0 + UHER0
 
 ddG_HOCO = 0.414 # correction from binding energy to free energy
@@ -157,71 +157,74 @@ EHOCO_d = {
 
 if __name__ == '__main__':
     pCO2 = 1.
+    # pCO =  0.055
     pCO =  1.
     xH2O = 1.
     cHp = cHp0 #1.
     
-    # N = 20*4
-    # M = 30*4
-    N = 20*4
-    M = 20*4
-    R = np.empty([M,N])
-    Thetas = np.empty([M,N,3])
-    # E_HOCO_e = np.linspace(-0.8, 1.45, M)
-    # E_CO_e = np.linspace(-2.2, 0.6, N)
-    E_CO_e = np.linspace(-1.5, 1., N)
-    E_HOCO_e = np.linspace(-1.2, 1.8, M)
-    # EHOCOs = np.linspace(-1, 2, N)
-    # ECOs = np.linspace(-2, 0, N)
-
-    jmax = 10.0e3 # exptl current plateau's at 10 mA/cm2 
-    jmin = 0.1
-    for j, E_CO in enumerate(E_CO_e):
-        for i, E_HOCO in enumerate(E_HOCO_e):
-            k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, U, T=T0)
-            rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
-            # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
-            thetas, rates = rm.solve()
-            # print(rates)
-            rate = min(jmax, rates[0])
-            rate = max(jmin, rate)
-            R[i,j] = np.log10(rate)
-            Thetas[i,j,:] = thetas
-
-    # data for the elements
-    metals = ECO_d.keys()
-
-    from matplotlib import rc
-    rc('font', **{'family':'sans-serif','sans-serif':['Helvetica'], 'size':8})
-    #rc('text', usetex=True)
+    # volcano plot
+    if 1:
+        # N = 20*4
+        # M = 30*4
+        N = 20*4
+        M = 20*4
+        R = np.empty([M,N])
+        Thetas = np.empty([M,N,3])
+        # E_HOCO_e = np.linspace(-0.8, 1.45, M)
+        # E_CO_e = np.linspace(-2.2, 0.6, N)
+        E_CO_e = np.linspace(-1.5, 1., N)
+        E_HOCO_e = np.linspace(-1.2, 1.8, M)
+        # EHOCOs = np.linspace(-1, 2, N)
+        # ECOs = np.linspace(-2, 0, N)
     
-    plt.figure(1, dpi=300)
-    plt.clf()
-    plt.subplots_adjust(left=.16, bottom=.16, right=.96, top=.90)
-    # pl.hold(1)
-    contours = np.linspace(np.log10(jmin), np.log10(jmax), 11) 
-    plt.contourf(E_CO_e, E_HOCO_e, R, contours, cmap=plt.cm.jet)
-    # E_HOCO_scaling = HOCO_CO_scaling(E_CO_e)
-    # pl.plot(E_CO_e, E_HOCO_scaling,'-k', lw=1)
-    # for i in range(len(ECO_d)): # elements
-    #     pl.text(ECO_d[i], EHOCO_d[i], texts[i], 
-    #             ha='center', va='center')
-    for i,metal in enumerate(metals):
-        plt.plot(ECO_d[metal], EHOCO_d[metal], 'o', color='black') 
-        plt.text(ECO_d[metal], EHOCO_d[metal]+0.05, metal, fontsize=12, horizontalalignment='center', verticalalignment='bottom')
+        jmax = 10.0e3 # exptl current plateau's at 10 mA/cm2 
+        jmin = 0.1
+        for j, E_CO in enumerate(E_CO_e):
+            for i, E_HOCO in enumerate(E_HOCO_e):
+                k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, U, T=T0)
+                rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+                # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
+                thetas, rates = rm.solve()
+                # print(rates)
+                rate = min(jmax, rates[0])
+                rate = max(jmin, rate)
+                R[i,j] = np.log10(rate)
+                Thetas[i,j,:] = thetas
     
-    #linear fiting and plot linear line
-    m, b = np.polyfit(list(ECO_d.values()), list(EHOCO_d.values()), 1)
-    # pl.plot(list(ECO_d.values()), m * np.array(list(ECO_d.values())) + b, linewidth=1, color='black')
-    plt.axline((list(ECO_d.values())[0], list(ECO_d.values())[0]*m +b), slope=m, color='black')
-    plt.xlim([E_CO_e[0]+0.1, E_CO_e[-1]-0.1])
-    plt.ylim([E_HOCO_e[0]+0.1, E_HOCO_e[-1]-0.1])
-    plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5))
-    plt.title(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
-    plt.xlabel(r'$E_{\mathrm{CO}}$ (eV)')
-    plt.ylabel(r'$E_{\mathrm{HOCO}}$ (eV)')
-    plt.savefig('../data/CO2toCO_rate_vs_HOCO_CO.png', dpi=300)
-    plt.show()
+        # data for the elements
+        metals = ECO_d.keys()
+    
+        from matplotlib import rc
+        rc('font', **{'family':'sans-serif','sans-serif':['Helvetica'], 'size':8})
+        #rc('text', usetex=True)
+        
+        plt.figure(1, dpi=300)
+        plt.clf()
+        plt.subplots_adjust(left=.16, bottom=.16, right=.96, top=.90)
+        # pl.hold(1)
+        contours = np.linspace(np.log10(jmin), np.log10(jmax), 11) 
+        plt.contourf(E_CO_e, E_HOCO_e, R, contours, cmap=plt.cm.jet)
+        # E_HOCO_scaling = HOCO_CO_scaling(E_CO_e)
+        # pl.plot(E_CO_e, E_HOCO_scaling,'-k', lw=1)
+        # for i in range(len(ECO_d)): # elements
+        #     pl.text(ECO_d[i], EHOCO_d[i], texts[i], 
+        #             ha='center', va='center')
+        for i,metal in enumerate(metals):
+            plt.plot(ECO_d[metal], EHOCO_d[metal], 'o', color='black') 
+            plt.text(ECO_d[metal], EHOCO_d[metal]+0.05, metal, fontsize=12, horizontalalignment='center', verticalalignment='bottom')
+        
+        #linear fiting and plot linear line
+        m, b = np.polyfit(list(ECO_d.values()), list(EHOCO_d.values()), 1)
+        # pl.plot(list(ECO_d.values()), m * np.array(list(ECO_d.values())) + b, linewidth=1, color='black')
+        plt.axline((list(ECO_d.values())[0], list(ECO_d.values())[0]*m +b), slope=m, color='black')
+        plt.xlim([E_CO_e[0]+0.1, E_CO_e[-1]-0.1])
+        plt.ylim([E_HOCO_e[0]+0.1, E_HOCO_e[-1]-0.1])
+        plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5))
+        plt.title(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
+        plt.xlabel(r'$E_{\mathrm{CO}}$ (eV)')
+        plt.ylabel(r'$E_{\mathrm{HOCO}}$ (eV)')
+        plt.savefig('../data/CO2toCO_rate_vs_HOCO_CO.png', dpi=300)
+        plt.show()
     
     if 1: # test K1, K2, K3 using Cu(211) as an example
         N = 10
@@ -230,14 +233,14 @@ if __name__ == '__main__':
         dG3 = []
         U = np.linspace(-1.25, 1, N)
         for i, u in enumerate(U):
-            print(i)
-            E_HOCO = 0.42967678
-            E_CO = -0.36259556 # CO ads energy
+            # print(i)
+            E_HOCO = -0.01
+            E_CO = -0.54 # CO ads energy
             #E_CO = - 0.3 # CO ads energy
             # U = -0.0
-            K1 = get_K1(E_HOCO, U, T=T0)
-            K2 = get_K2(E_HOCO, E_CO, U, T=T0)
-            K3 = get_K3(E_CO, U, T=T0)
+            K1 = get_K1(E_HOCO, u, T=T0)
+            K2 = get_K2(E_HOCO, E_CO, u, T=T0)
+            K3 = get_K3(E_CO, u, T=T0)
             # K1_s = get_K1(E_CO, U, T=T0)
             # K2_s = get_K2(E_CO, U, T=T0)
             # K3_s = get_K3(E_CO, U, T=T0)
@@ -249,11 +252,51 @@ if __name__ == '__main__':
             # print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
             # print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
         plt.figure(1, dpi=300)
-        plt.plot(U, dG1, color='black')
-        plt.plot(U, dG2, color='red')
-        plt.plot(U, dG3, color='blue')
+        plt.plot(U, dG1, color='black', label='dG1')
+        plt.plot(U, dG2, color='red', label='dG2')
+        plt.plot(U, dG3, color='blue', label='dG3')
         plt.xlabel(r'Potential (V)')
         plt.ylabel(r'${\Delta}$G (eV)')
+        plt.legend()
+    
+    #coverage
+    if 1:
+        N = 100
+        Thetas1 = []
+        Thetas2 = []
+        Thetas3 = []
+        U = np.linspace(-2, 2, N)
+        for i, u in enumerate(U):
+            print('===============================')
+            print(u)
+            E_HOCO = -0.08
+            E_CO = -0.54 # CO ads energy
+            # E_HOCO = 0.43
+            # E_CO = -0.36 # CO ads energy
+            # U = -0.0
+            k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, u, T=T0)
+            rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+            # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
+            thetas, rates = rm.solve()
+            # print(rates)
+            # rate = min(jmax, rates[0])
+            # rate = max(jmin, rate)
+            # R[i,j] = np.log10(rate)
+            # print(thetas)
+            Thetas1.append(thetas[0])
+            Thetas2.append(thetas[1])
+            Thetas3.append(thetas[2])
+            # dG1_s, dG2_s, dG3_s = -kB*T0*np.log(K1_s), -kB*T0*np.log(K2_s), -kB*T0*np.log(K3_s)
+            # print(ddG_HOCO, ddG_CO)
+            # print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
+            # print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
+        plt.figure(2, dpi=300)
+        plt.plot(U, Thetas1, color='black', label='HOCO*')
+        plt.plot(U, Thetas2, color='red', label='CO*')
+        plt.plot(U, Thetas3, color='blue', label='*')
+        plt.xlabel(r'Potential (V)')
+        plt.ylabel(r'Coverage (a.u.)')
+        plt.legend()
 
     # plots
     # import matplotlib.pyplot as plt

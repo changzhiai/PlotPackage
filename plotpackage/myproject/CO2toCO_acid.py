@@ -88,6 +88,7 @@ class CO2toCO():
 
     def solve(self):
         thetas3 = np.linalg.solve(self.A, self.b)
+        # print(thetas3)
         rate3 = self._get_rate3(thetas3)
         return thetas3, rate3
 
