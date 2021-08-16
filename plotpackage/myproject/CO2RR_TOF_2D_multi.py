@@ -209,7 +209,7 @@ col1=2 # column in excel
 col2=3 # column in excel
 col1 = col1 - 2
 col2 = col2 - 2
-for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-new']:
+for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-new']:
     #change it only for excel
     sheet = types #Sheet1 by defaut
     min_row = 1 #1st column in excel
@@ -221,8 +221,10 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     
     # # del rows; delete according to element names in excel
     del_ele = []
-    if types == 'near-new':
-        del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+    # if types == 'near-new':
+    #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+    if types == 'top-new':
+        del_ele = [] #remove distortion for near
     elif types == 'line':
         del_ele = ['Ag', 'Y'] #remove distortion for line
     elif types == 'triangle':
@@ -250,31 +252,35 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     contours = np.linspace(np.log10(jmin), np.log10(jmax), 11) 
     plt.contourf(E_CO_e, E_HOCO_e, R, contours, cmap=plt.cm.jet)
     for i,metal in enumerate(observationName):
-        plt.plot(ECO_d[i], EHOCO_d[i], 'o', color='black') 
-        plt.text(ECO_d[i], EHOCO_d[i]+0.05, metal, fontsize=12, horizontalalignment='center', verticalalignment='bottom')
+        plt.plot(ECO_d[i], EHOCO_d[i], 'o', color='white') 
+        plt.text(ECO_d[i], EHOCO_d[i]+0.05, metal, fontsize=12, horizontalalignment='center', verticalalignment='bottom', color='white')
     
     #linear fiting and plot linear line
     m, b = np.polyfit(ECO_d, EHOCO_d, 1)
-    plt.axline((ECO_d[0], ECO_d[0]*m +b), slope=m, color='black')
+    plt.axline((ECO_d[0], ECO_d[0]*m +b), slope=m, color='white')
         
     plt.xlim([E_CO_e[0]+0.1, E_CO_e[-1]-0.1])
     plt.ylim([E_HOCO_e[0]+0.1, E_HOCO_e[-1]-0.1])
-    plt.title(text[index])
+    ax.tick_params(labelsize=12) #tick label font size
+    # plt.title(text[index], fontsize=14,)
+    plt.text(0.05, 0.93, text[index], horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, color='white')        
     # if index==2 or index==5:
     #     bar = plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5))
     #     bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
     if index==3 or index==4 or index==5:
-        plt.xlabel(r'$E_{\mathrm{CO}}$ (eV)')
+        plt.xlabel(r'$E_{\mathrm{CO}}$ (eV)', fontsize=14,)
     if index==0 or index==3:
-        plt.ylabel(r'$E_{\mathrm{HOCO}}$ (eV)')
+        plt.ylabel(r'$E_{\mathrm{HOCO}}$ (eV)', fontsize=14,)
     if index==2:
         cbaxes = fig.add_axes([0.91, 0.659, 0.015, 0.22]) #Add position (left, bottom, width, height)
         bar = plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5), cax=cbaxes)
-        bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
+        bar.ax.tick_params(labelsize=10)
+        bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)', fontsize=14,)
     if index==5:
         cbaxes = fig.add_axes([0.91, 0.391, 0.015, 0.22]) #Add position (left, bottom, width, height)
         bar = plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5), cax=cbaxes)
-        bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
+        bar.ax.tick_params(labelsize=12)
+        bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)', fontsize=14,)
     
     index = index +1
     

@@ -18,12 +18,12 @@ import numpy as np
 filename = '../data/CO2RR.xlsx'
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
 min_col = 1 #1st column in excel
-max_col = 12 #5th column in excel
+max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'paral' #Sheet1 by defaut
+sheet = 'top-new' #Sheet1 by defaut
 min_row = 1 #1st column in excel
-max_row = 11 #9st column in excel
+max_row = 18 #9st column in excel
 
 #saved figure name
 figName1 = '../pictures/CO2RR_FreeEnergy_' + sheet + '.jpg'  #free energy diagram name
@@ -36,27 +36,28 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 
 ##del rows
 # del_rows = [2, 3, 7, 10]  #rows in excel
-del_rows = [4, 5, 6, 7, 8, 10, 11]  #rows in excel
+del_rows = []  #rows in excel
+# del_rows = [4, 5, 6, 7, 8, 10, 11]  #rows in excel
 del_list = [x -2 for x in del_rows]
 observationName = np.delete(observationName, del_list, 0)
 X = np.delete(X, del_list, 0)
 
-# CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
+CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 
 # #costom connection
 # CO2RRdiagram.add_link(start_id=0, end_id=3)
 # CO2RRdiagram.remove_link(start_id=0, end_id=1)
 
-# CO2RRdiagram.plot(title=sheet)
+CO2RRdiagram.plot(title=sheet)
 
 # descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
 # descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4
 
-col1 = 6 #column in excel
+col1 = 3 #column in excel
 col2 = 2 #column in excel
 
-col3 = 7 #column in excel
-col4 = 2 #column in excel
+col3 = 4 #column in excel
+col4 = 5 #column in excel
 xcol1 = col1 - 2
 xcol2 = col2 - 2 
 ycol1 = col3 - 2

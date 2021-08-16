@@ -31,7 +31,7 @@ class CO2RRFEDplot:
         #                   'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
         #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
         #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
-        self.colorList = {'Ti': 'red', 'Pd': 'black', 'Sc': 'blue', 'V': 'orange', 'Mn': 'green', 'Fe': 'purple', 'Co': 'deepskyblue', 'Ni': 'pink', 'Cu': 'lightgray', 'Zn': 'olive', 'Y': 'cyan', 'Zr': 'lime', 'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen'}
+        self.colorList = {'Ti': 'red', 'Pd': 'black', 'Sc': 'blue', 'V': 'orange', 'Mn': 'green', 'Fe': 'lightgray', 'Co': 'deepskyblue', 'Ni': 'pink', 'Cu': 'purple', 'Zn': 'olive', 'Y': 'cyan', 'Zr': 'lime', 'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen'}
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR

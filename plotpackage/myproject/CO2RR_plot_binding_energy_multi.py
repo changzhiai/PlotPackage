@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'island-new' #Sheet1 by defaut
+sheet = 'top-new' #Sheet1 by defaut
 # min_row = 40 #1st column in excel
 # max_row = 57 #9st column in excel
 # min_row = 21 #1st column in excel
@@ -39,7 +39,7 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 
 # # del rows; delete according to element names in excel
 del_ele = []
-del_ele = ['Y', 'Zr', 'Zn'] #remove distortion for island
+# del_ele = ['Y', 'Zr', 'Zn'] #remove distortion for island
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] #del double bonds for island
 # del_ele = ['Zn', 'Y', 'V', 'Nb', 'Ti', 'Zr', 'Sc'] #remove distortion for parallelogram
 # del_ele = ['Zn', 'Y', 'Zr']  # Sc?

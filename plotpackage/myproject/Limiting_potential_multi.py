@@ -42,8 +42,9 @@ def limiting(EHOCO, ECO, T):
     DG1 = EHOCO + ddG_HOCO
     DG2 = ECO + ddG_CO - EHOCO - ddG_HOCO - G_CO2g - G_H2g + G_H2Og + G_COg
     DG3 = -ECO - ddG_CO
+    # DG3 = -0.2
     # limiting_potenital = max(DE1, DE2, DE3)
-    limiting_potenital = max(DG1/(-1), DG2/(-1), DG3/(-1)) 
+    limiting_potenital = max(DG1/(-1), DG2/(-1), DG3/(-1)) # DG3 is a fake potential because no eletron transfer
 
     return limiting_potenital
 
@@ -148,7 +149,7 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     observationName = np.delete(observationName, del_list, 0)
     X = np.delete(X, del_list, 0)
     
-    M  = 3
+    
     ax = plt.subplot(3, 3, index + 1)
     EHOCO_d = (X[:, col1]).astype(float) 
     ECO_d = (X[:, col2]).astype(float) 

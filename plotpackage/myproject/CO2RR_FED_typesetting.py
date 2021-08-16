@@ -57,7 +57,7 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     elif types == 'island-new':
         del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for line
     elif types == 'overly-new':
-        del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
+        del_ele = ['Sc', 'Zn', 'Y', 'Zr', 'Fe'] #remove distortion for line
         
 
     del_rows = [observationName.index(each)+2 for each in del_ele]
