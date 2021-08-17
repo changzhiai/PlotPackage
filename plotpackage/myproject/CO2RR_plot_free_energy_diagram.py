@@ -48,7 +48,7 @@ CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 # CO2RRdiagram.add_link(start_id=0, end_id=3)
 # CO2RRdiagram.remove_link(start_id=0, end_id=1)
 
-CO2RRdiagram.plot(title=sheet)
+CO2RRdiagram.plot(title=sheet, legandSize=11.5)
 
 # descriper1 = (X[:, 1] - X[:, 0]).astype(float) #step2-step1
 # descriper2 = (X[:, 2] - X[:, 3]).astype(float) #step3-step4

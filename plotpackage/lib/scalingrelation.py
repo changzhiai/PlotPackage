@@ -39,7 +39,7 @@ class ScalingRelationPlot:
         ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
         plt.margins(y=0.08)
         plt.title(title, fontsize=14)
-        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14)        
+        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, fontweight='bold')        
         #get current axis object and change format
         #ax = fig.gca()
         ax.tick_params(labelsize=12) #tick label font size

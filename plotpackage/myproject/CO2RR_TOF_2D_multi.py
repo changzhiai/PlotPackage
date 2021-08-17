@@ -202,7 +202,7 @@ figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure
 
 index = 0
 fig = plt.figure(figsize=(18, 16), dpi = 300)
-text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
+text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 # col1 = [2, 2, 2, 3, 3, 5] #column in excel
 # col2 = [3, 5, 4, 5, 4, 4] #column in excel
 col1=2 # column in excel
@@ -263,7 +263,7 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     plt.ylim([E_HOCO_e[0]+0.1, E_HOCO_e[-1]-0.1])
     ax.tick_params(labelsize=12) #tick label font size
     # plt.title(text[index], fontsize=14,)
-    plt.text(0.05, 0.93, text[index], horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, color='white')        
+    plt.text(0.05, 0.93, text[index], horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, color='white', fontweight='bold')        
     # if index==2 or index==5:
     #     bar = plt.colorbar(ticks=np.arange(min(contours), max(contours), 0.5))
     #     bar.set_label(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')

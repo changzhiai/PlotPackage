@@ -81,7 +81,7 @@ class CO2RRFEDplot:
             plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= specis)
         plt.legend(fontsize=legandSize)
         plt.title(title, fontsize=14)
-        plt.text(0.04, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14)        
+        plt.text(0.04, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14, fontweight='bold')        
         axFree.yaxis.set_label_coords(-0.1, 0.5)
         axFree.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
         #save figure

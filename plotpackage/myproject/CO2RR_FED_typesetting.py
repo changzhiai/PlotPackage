@@ -27,14 +27,14 @@ figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure
 
 i = 0
 fig = plt.figure(figsize=(18, 16), dpi = 300)
-text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
+text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 # col1 = [2, 2, 2, 3, 3, 5] #column in excel
 # col2 = [3, 5, 4, 5, 4, 4] #column in excel
 col1=2 # column in excel
 col2=5 # column in excel
 col1 = col1 - 2
 col2 = col2 - 2
-for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-new']:
+for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-new']:
     #change it only for excel
     sheet = types #Sheet1 by defaut
     min_row = 1 #1st column in excel
@@ -46,6 +46,8 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     
     # # del rows; delete according to element names in excel
     del_ele = []
+    if types == 'top-new':
+        del_ele = [] #remove distortion for near
     if types == 'near-new':
         del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
     elif types == 'line':
@@ -75,7 +77,7 @@ for types in ['near-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly
     # sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
     
     CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
-    CO2RRdiagram.plot(ax = ax, title='', save=False, legandSize = 9.5, text = text[i], ratio=1.4)
+    CO2RRdiagram.plot(ax = ax, title='', save=False, legandSize = 9., text = text[i], ratio=1.4)
     
     i = i +1
     
