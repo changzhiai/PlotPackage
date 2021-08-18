@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'top-new' #Sheet1 by defaut
+sheet = 'paral-new' #Sheet1 by defaut
 # min_row = 40 #1st column in excel
 # max_row = 57 #9st column in excel
 # min_row = 21 #1st column in excel
@@ -50,7 +50,7 @@ del_ele = []
 # del_ele = ['Ag', 'Y', 'Cu'] #remove distortion for line
 # del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
 # del_ele = ['Co', 'Ni', 'Cu', 'Zn', 'Ag'] #remove distortion for top
-del_ele = ['Mn'] #remove distortion for island
+# del_ele = ['Mn'] #remove distortion for island
 del_rows = [observationName.index(each)+2 for each in del_ele]
 ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
 del_list = [x -2 for x in del_rows]

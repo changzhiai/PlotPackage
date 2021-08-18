@@ -46,18 +46,33 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     
     # # del rows; delete according to element names in excel
     del_ele = []
+    # if types == 'top-new':
+    #     del_ele = [] #remove distortion for near
+    # if types == 'near-new':
+    #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+    # elif types == 'line':
+    #     del_ele = ['Ag', 'Y'] #remove distortion for line
+    # elif types == 'triangle':
+    #     del_ele = ['Y',] #remove distortion for triangle
+    # elif types == 'paral-new':
+    #     del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for line
+    # elif types == 'island-new':
+    #     del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for line
+    # elif types == 'overly-new':
+    #     del_ele = ['Sc', 'Zn', 'Y', 'Zr', 'Fe'] #remove distortion for line
+    
+    # if types == 'near-new':
+    #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
     if types == 'top-new':
         del_ele = [] #remove distortion for near
-    if types == 'near-new':
-        del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
     elif types == 'line':
-        del_ele = ['Ag', 'Y'] #remove distortion for line
+        del_ele = ['Y', ] #remove distortion for line
     elif types == 'triangle':
         del_ele = ['Y',] #remove distortion for triangle
     elif types == 'paral-new':
-        del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for line
+        del_ele = ['Zn', 'Y',] #remove distortion for paral
     elif types == 'island-new':
-        del_ele = ['Y', 'Zr', 'Sc', 'Zn'] #remove distortion for line
+        del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for island
     elif types == 'overly-new':
         del_ele = ['Sc', 'Zn', 'Y', 'Zr', 'Fe'] #remove distortion for line
         

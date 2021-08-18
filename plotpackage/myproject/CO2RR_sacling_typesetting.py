@@ -28,8 +28,8 @@ figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure
 
 # text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
-colx = [2, 2, 2, 3, 3, 5] #column in excel
-coly = [3, 5, 4, 5, 4, 4] #column in excel
+colx = [3, 2, 2, 3, 3, 5] #column in excel
+coly = [2, 5, 4, 5, 4, 4] #column in excel
 for index in [0, 1, 4]:
     # col1=3 # column in excel
     # col2=4 # column in excel
@@ -51,21 +51,35 @@ for index in [0, 1, 4]:
         
         # # del rows; delete according to element names in excel
         del_ele = []
+        # if types == 'top-new':
+        #     del_ele = [] #remove distortion for near
+        # if types == 'near-new':
+        #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+        # elif types == 'line':
+        #     del_ele = ['Ag', 'Y'] #remove distortion for line
+        # elif types == 'triangle':
+        #     del_ele = ['Y',] #remove distortion for triangle
+        # elif types == 'paral-new':
+        #     del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for line
+        # elif types == 'island-new':
+        #     del_ele = ['Y', 'Zr',  'Zn'] #remove distortion for line
+        # elif types == 'overly-new':
+        #     del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
+        # if types == 'near-new':
+        #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
         if types == 'top-new':
             del_ele = [] #remove distortion for near
-        if types == 'near-new':
-            del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
         elif types == 'line':
-            del_ele = ['Ag', 'Y'] #remove distortion for line
+            del_ele = ['Y', ] #remove distortion for line
         elif types == 'triangle':
             del_ele = ['Y',] #remove distortion for triangle
         elif types == 'paral-new':
-            del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for line
+            del_ele = ['Zn', 'Y',] #remove distortion for paral
         elif types == 'island-new':
-            del_ele = ['Y', 'Zr',  'Zn'] #remove distortion for line
+            del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for island
         elif types == 'overly-new':
             del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
-            
+        # del_ele += ['Cu', 'Ag']
         del_rows = [observationName.index(each)+2 for each in del_ele]
         ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
         del_list = [x - 2 for x in del_rows]

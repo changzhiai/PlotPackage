@@ -223,16 +223,30 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     del_ele = []
     # if types == 'near-new':
     #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+    # if types == 'top-new':
+    #     del_ele = [] #remove distortion for near
+    # elif types == 'line':
+    #     del_ele = ['Ag', 'Y'] #remove distortion for line
+    # elif types == 'triangle':
+    #     del_ele = ['Y',] #remove distortion for triangle
+    # elif types == 'paral-new':
+    #     del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for paral
+    # elif types == 'island-new':
+    #     del_ele = ['Y', 'Zr',  'Zn'] #remove distortion for island
+    # elif types == 'overly-new':
+    #     del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
+    # if types == 'near-new':
+    #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
     if types == 'top-new':
         del_ele = [] #remove distortion for near
     elif types == 'line':
-        del_ele = ['Ag', 'Y'] #remove distortion for line
+        del_ele = ['Y', ] #remove distortion for line
     elif types == 'triangle':
         del_ele = ['Y',] #remove distortion for triangle
     elif types == 'paral-new':
-        del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for paral
+        del_ele = ['Zn', 'Y',] #remove distortion for paral
     elif types == 'island-new':
-        del_ele = ['Y', 'Zr',  'Zn'] #remove distortion for island
+        del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for island
     elif types == 'overly-new':
         del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
         
@@ -256,8 +270,11 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
         plt.text(ECO_d[i], EHOCO_d[i]+0.05, metal, fontsize=12, horizontalalignment='center', verticalalignment='bottom', color='white')
     
     #linear fiting and plot linear line
-    m, b = np.polyfit(ECO_d, EHOCO_d, 1)
-    plt.axline((ECO_d[0], ECO_d[0]*m +b), slope=m, color='white')
+    # m, b = np.polyfit(ECO_d, EHOCO_d, 1)
+    # plt.axline((ECO_d[3], ECO_d[3]*m +b), slope=m, color='white')
+    m, b = np.polyfit(EHOCO_d, ECO_d, 1)
+    plt.axline(( ECO_d[0], ECO_d[0]/m-b/m), slope=1/m, color='white')
+    # plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color=linecolor)
         
     plt.xlim([E_CO_e[0]+0.1, E_CO_e[-1]-0.1])
     plt.ylim([E_HOCO_e[0]+0.1, E_HOCO_e[-1]-0.1])
