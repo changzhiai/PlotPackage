@@ -20,9 +20,9 @@ limiting_potenital = 0
 
 ddG_HOCO = 0.414 # correction from binding energy to free energy
 ddG_CO = 0.579
+ddG_OH = 0.333
 
-
-def limiting(EHOCO, ECO, T):
+def limiting(EHOCO, EOH, T):
     """ Calculate forward rate constants and equilibrium constants 
     as function of the EO descriptor and temperature T.
     """
@@ -34,8 +34,13 @@ def limiting(EHOCO, ECO, T):
     DG1 = EHOCO + ddG_HOCO
     DG2 = ECO + ddG_CO - EHOCO - ddG_HOCO - G_CO2g - G_H2g + G_H2Og + G_COg
     DG3 = -ECO - ddG_CO
+    
+    DG_OH = EOH + ddG_OH
     # limiting_potenital = max(DE1, DE2, DE3)
-    limiting_potenital = max(DG1/(-1), DG2/(-1), DG3/(-1)) 
+    # limiting_potenital = max(DG1/(-1), DG2/(-1), DG3/(-1)) 
+    limiting_potenital = max(DG1/(-1), DG_OH/(-1))
+    # limiting_potenital = max(DG1/(-1), DG2/(-1)) 
+    # limiting_potenital = max( DG2/(-1), DG_OH/(-1)) 
 
     return limiting_potenital
 

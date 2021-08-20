@@ -21,7 +21,7 @@ min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
 #change it only for excel
-sheet = 'paral-new' #Sheet1 by defaut
+sheet = 'top-new' #Sheet1 by defaut
 # min_row = 20 #1st column in excel
 # max_row = 37 #9st column in excel
 min_row = 1 #1st column in excel
@@ -41,7 +41,7 @@ del_ele = []
 # del_ele = ['Y', 'Zr', 'Sc', 'Zn'] 
 # del_ele = ['Ag', 'Cu', 'Ti', 'Sc'] #remove distortion for island
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Fe', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru'] #del double bonds for island
-del_ele = ['Zn', 'Y', ]
+# del_ele = ['Zn', 'Y', ]
 # del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for parallelogram
 # del_ele += ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #del double bonds for parallelogram
 # del_ele = ['Zn', 'Y', 'Zr']
@@ -49,6 +49,7 @@ del_ele = ['Zn', 'Y', ]
 # del_ele = ['Y',] #remove distortion for triangle
 # del_ele = ['Ag', 'Y'] #remove distortion for line
 # del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+del_ele = [ 'Sc', 'Ti', 'V', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Y', 'Zr', 'Nb', 'Mo', 'Ru', 'Rh', 'Ag']
 del_rows = [observationName.index(each)+2 for each in del_ele]
 ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
 del_list = [x -2 for x in del_rows]
