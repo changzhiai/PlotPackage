@@ -67,6 +67,15 @@ for index in [0, 1, 4]:
         #     del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
         # if types == 'near-new':
         #     del_ele = ['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ] #remove distortion for near
+        
+        # #choose some rows
+        # # selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #select according to element names in excel
+        # selected_ele = ['Ti', 'Sc', 'Nb', 'Zr', 'Y', 'Zn', 'V', 'Mn', 'Mo', ] #select according to element names in excel
+        # ranges = [observationName.index(each)+2 for each in selected_ele]
+        # observationName = [observationName[i-2] for i in ranges]
+        # selected_rows = [i-2 for i in ranges]
+        # X = X[selected_rows,:]
+        
         if types == 'top-new':
             del_ele = [] #remove distortion for near
         elif types == 'line':
@@ -79,12 +88,13 @@ for index in [0, 1, 4]:
             del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for island
         elif types == 'overly-new':
             del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
-        # del_ele += ['Cu', 'Ag']
+        del_ele += ['Ti', 'Sc', 'Nb', 'Zr', 'Y', 'Zn', 'V', 'Mn', 'Mo', 'Pd'] #double bond and pure
         del_rows = [observationName.index(each)+2 for each in del_ele]
-        ### del_rows = [10, 12, 13, 18]  #delete according to rows in excel
         del_list = [x - 2 for x in del_rows]
         observationName = np.delete(observationName, del_list, 0)
         X = np.delete(X, del_list, 0)
+        
+        
         
         M  = 3
         ax = plt.subplot(3, 3, i + 1)

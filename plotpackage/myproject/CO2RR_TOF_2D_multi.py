@@ -27,7 +27,8 @@ G_COg = -12.564 # eV
 
 kB = 8.617e-5 # Boltzmann constant in eV/K
 hplanck = 4.135669e-15 # eV s
-T0 = 370
+T0 = 297.15
+# T0 = 370
 Gact0 = Gact1 = Gact2 = 0.475 # activative free energy
 tc0 = tc1 = tc2 = 0.5  #???
 A_act1 = np.exp( - Gact1 / ( kB * T0 ) ) # 
