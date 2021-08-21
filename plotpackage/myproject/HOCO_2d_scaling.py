@@ -36,7 +36,6 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
     #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
     
-    
     # #choose some rows
     # # selected_ele = ['Sc', 'Ti', 'V', 'Mn', 'Zn', 'Y', 'Zr', 'Nb', 'Mo'] #select according to element names in excel
     # selected_ele = ['Ti', 'Sc', 'Nb', 'Zr', 'Y', 'Zn', 'V', 'Mn', 'Mo', ] #select according to element names in excel
