@@ -28,7 +28,6 @@ max_col = 5 #5th column in excel
 min_row = 1 #1st column in excel
 max_row = 18 #9st column in excel
 
-
 ############ plot free energy diagram ###############
 
 # types = sheet
