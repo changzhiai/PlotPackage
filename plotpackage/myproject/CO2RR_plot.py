@@ -67,7 +67,8 @@ X = np.delete(X, del_list, 0)
 # observationName = [observationName[i-2] for i in ranges]
 # selected_rows = [i-2 for i in ranges]
 # X = X[selected_rows,:]
-
+stepsNames = ['* + CO$_{2}$', 'HOCO*', 'CO*', '* + CO']  #reload step name for CO2RR
+observationName = ["PdH",]
 CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
 ###costom connection
 # CO2RRdiagram.add_link(start_id=0, end_id=3)
