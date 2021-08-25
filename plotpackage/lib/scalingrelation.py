@@ -51,7 +51,7 @@ class ScalingRelationPlot:
         handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color=linecolor)
         #handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color='red')
         
-        #add data tag annotation
+        #add data and tag annotation
         for i, name in enumerate(self.observationName):
             plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), fontsize=14, horizontalalignment='center', verticalalignment='bottom')
         

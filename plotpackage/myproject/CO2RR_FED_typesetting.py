@@ -90,6 +90,7 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     descriper2 = (X[:, col2]).astype(float) 
     # sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)   
     # sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
+    stepsNames = ['* + CO$_{2}$', 'HOCO*', 'CO*', '* + CO']  #reload step name for CO2RR
     
     CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
     CO2RRdiagram.plot(ax = ax, title='', save=False, legandSize = 9., text = text[i], ratio=1.4)

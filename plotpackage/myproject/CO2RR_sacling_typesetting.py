@@ -28,8 +28,8 @@ figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure
 
 # text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
-colx = [3, 2, 2, 3, 3, 5] #column in excel
-coly = [2, 5, 4, 5, 4, 4] #column in excel
+colx = [2, 2, 2, 3, 3, 5] #column in excel
+coly = [3, 5, 4, 5, 4, 4] #column in excel
 for index in [0, 1, 4]:
     # col1=3 # column in excel
     # col2=4 # column in excel
@@ -88,7 +88,7 @@ for index in [0, 1, 4]:
             del_ele = ['Zn', 'Y', 'Zr'] #remove distortion for island
         elif types == 'overly-new':
             del_ele = ['Sc', 'Zn', 'Y', 'Zr'] #remove distortion for line
-        del_ele += ['Ti', 'Sc', 'Nb', 'Zr', 'Y', 'Zn', 'V', 'Mn', 'Mo', 'Pd'] #double bond and pure
+        # del_ele += ['Ti', 'Sc', 'Nb', 'Zr', 'Y', 'Zn', 'V', 'Mn', 'Mo', 'Pd'] #double bond and pure
         del_rows = [observationName.index(each)+2 for each in del_ele]
         del_list = [x - 2 for x in del_rows]
         observationName = np.delete(observationName, del_list, 0)
@@ -99,7 +99,21 @@ for index in [0, 1, 4]:
         M  = 3
         ax = plt.subplot(3, 3, i + 1)
         descriper1 = (X[:, col1]).astype(float) 
-        descriper2 = (X[:, col2]).astype(float) 
+        descriper2 = (X[:, col2]).astype(float)
+        # p = 0
+        # for ii, each in enumerate(observationName):
+        #     if each == 'Pd':
+        #         p = ii
+        # observationName[p] = 'Pure'
+        # np.where(observationName=='Pd', "Pure", observationName)
+        
+        # for ii, each in enumerate(observationName):
+        #     if each == 'Pd':
+        #         observationName = observationName.replace("Pd", "Pure")
+        # np.char.replace(observationName, 'Pd', 'Pure')
+            
+        stepsNames = ['$E_{HOCO*}$', '$E_{CO*}$', '$E_{H*}$', '$E_{OH*}$']
+        
         sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)   
         sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
         
