@@ -140,7 +140,7 @@ for index in [0, 1, 4]:
         i = i +1
         
     plt.show()
-    fig.savefig(figName2)
+    # fig.savefig(figName2)
     print('===============================')
     
         

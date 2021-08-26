@@ -89,3 +89,4 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     _ = plt.title(types)
     plt.show()
     
+    
