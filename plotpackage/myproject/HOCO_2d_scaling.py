@@ -86,5 +86,6 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     
     # _ = plt.plot(descriper1, a*descriper2 + b*descriper3, 'o')1
     _ = plt.legend()
+    _ = plt.title(types)
     plt.show()
     

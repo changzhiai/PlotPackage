@@ -17,9 +17,9 @@ class ScalingRelationPlot:
         self.figName = figname
         
     def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO', title='', text=''):                
-        print('scaling relation:')
-        print('x axis' + '(' + xlabel + '): ', self.descriper1)
-        print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
+        # print('scaling relation:')
+        # print('x axis' + '(' + xlabel + '): ', self.descriper1)
+        # print('y axis' + '(' + ylabel + '): ', self.descriper2, '\n')
         
         #plot data points
         if not ax:
@@ -32,7 +32,19 @@ class ScalingRelationPlot:
 
         #fig = plt.figure(figsize=(8, 6), dpi = 300)
         #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
-        plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
+        
+        # add element tags
+        if isinstance(dotcolor, dict)==True:
+            for i, name in enumerate(self.observationName):
+                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor[name])  #plot dots
+                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+        else:
+            plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
+            for i, name in enumerate(self.observationName):
+                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+                
+
+        # plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
         plt.xlabel(xlabel, fontsize=14)
         plt.ylabel(ylabel, fontsize=14)
         ax.yaxis.set_label_coords(-0.12, 0.5)
@@ -40,6 +52,7 @@ class ScalingRelationPlot:
         plt.margins(y=0.08)
         plt.title(title, fontsize=14)
         plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, fontweight='bold')        
+        
         #get current axis object and change format
         #ax = fig.gca()
         ax.tick_params(labelsize=12) #tick label font size
@@ -51,10 +64,6 @@ class ScalingRelationPlot:
         handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color=linecolor)
         #handleFit = plt.plot(self.descriper1, m * self.descriper1 + b, linewidth=2, color='red')
         
-        #add data and tag annotation
-        for i, name in enumerate(self.observationName):
-            plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-        
         #add r2 tag
         from sklearn.metrics import r2_score
         model = np.array([m, b])
@@ -64,9 +73,12 @@ class ScalingRelationPlot:
         m = np.round(m, 2)
         b = np.round(b, 2)
         #plt.text(0.85, 0.3, 'R2 = {}'.format(r2), fontsize=14)
-        plt.legend(handles = handleFit, labels = ['$R^2$ = {}\ny = {} + {} * x '.format(r2, b, m)], loc="lower right", handlelength=0, fontsize=14)
+        plt.legend(handles = handleFit, labelcolor=linecolor, labels = ['$R^2$ = {}\ny = {} + {} * x '.format(r2, b, m)], loc="lower right", handlelength=0, fontsize=14)
+        print('r2:', r2)
         
         #save figure
         if save == True: 
             plt.show()
             fig.savefig(self.figName)
+        
+        # return fig

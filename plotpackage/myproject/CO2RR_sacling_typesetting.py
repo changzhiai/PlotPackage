@@ -21,16 +21,14 @@ filename = '../data/binding_energy.xlsx'
 min_col = 1 #1st column in excel
 max_col = 5 #5th column in excel
 
-#saved figure name
-figName1 = '../pictures/CO2RR_FreeEnergy_typesetting.jpg'  #free energy diagram name
-figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure name
-
-
 # text = ['Near', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 colx = [2, 2, 2, 3, 3, 5] #column in excel
 coly = [3, 5, 4, 5, 4, 4] #column in excel
 for index in [0, 1, 4]:
+    #saved figure name
+    figName1 = './paper1/AllFreeEnergy_typesetting_{}.jpg'.format(index)  #free energy diagram name
+    figName2 = './paper1/AllScalingRelation_typesetting_{}.jpg'.format(index) #scaling reation figure name
     # col1=3 # column in excel
     # col2=4 # column in excel
     col1=colx[index] # column in excel
@@ -93,30 +91,22 @@ for index in [0, 1, 4]:
         del_list = [x - 2 for x in del_rows]
         observationName = np.delete(observationName, del_list, 0)
         X = np.delete(X, del_list, 0)
-        
-        
-        
+           
         M  = 3
         ax = plt.subplot(3, 3, i + 1)
         descriper1 = (X[:, col1]).astype(float) 
         descriper2 = (X[:, col2]).astype(float)
-        # p = 0
-        # for ii, each in enumerate(observationName):
-        #     if each == 'Pd':
-        #         p = ii
-        # observationName[p] = 'Pure'
-        # np.where(observationName=='Pd', "Pure", observationName)
-        
-        # for ii, each in enumerate(observationName):
-        #     if each == 'Pd':
-        #         observationName = observationName.replace("Pd", "Pure")
-        # np.char.replace(observationName, 'Pd', 'Pure')
             
         stepsNames = ['$E_{HOCO*}$', '$E_{CO*}$', '$E_{H*}$', '$E_{OH*}$']
-        
+
         sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)   
         sr.plot(ax = ax, save=False, title='', xlabel=stepsNames[col1], ylabel=stepsNames[col2], text=text[i])
+        import string
+        ax.text(-0.17, 0.97, string.ascii_lowercase[i], transform=ax.transAxes, size=20, weight='bold')
+        
         
         i = i +1
-        
+       
     plt.show()
+    # fig.savefig(figName2)
+    print('===============================')

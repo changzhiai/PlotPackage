@@ -92,7 +92,7 @@ descriper1 = (X[:, xcol1] - X[:, xcol2]).astype(float) #step2-step1
 descriper2 = (X[:, ycol1] - X[:, ycol2]).astype(float) #step3-step4
 # descriper2 = (X[:, 4]).astype(float)
 sr = ScalingRelationPlot(descriper1, descriper2, observationName, figName2)
-sr.plot(save=True, title=sheet, xlabel=stepsNames[xcol1], ylabel=stepsNames[ycol1])
+sr.plot(save=False, title=sheet, xlabel=stepsNames[xcol1], ylabel=stepsNames[ycol1])
 
 #add metadata into pictures
 figNames = [figName1, figName2]

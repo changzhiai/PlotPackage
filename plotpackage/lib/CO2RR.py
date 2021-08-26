@@ -87,4 +87,6 @@ class CO2RRFEDplot:
         #save figure
         if save == True: 
             plt.show()
-            figFree.savefig(self.figName)
+            figFree.savefig(self.figName, dpi=300, bbox_inches='tight')
+        
+        # return figFree
