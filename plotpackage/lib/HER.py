@@ -27,7 +27,7 @@ class HERFEDplot:
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
-        self.stepsNames = ['* + $H^+$', '*H', '* + 1/2$H_2$',]  #reload step name for HER
+        # self.stepsNames = ['* + $H^+$', '*H', '* + 1/2$H_2$',]  #reload step name for HER
         #self.observationName = ["Pure", "Ni", "Co", "V", "Cr", "Mn", "Fe", "Pt"]  #reload specis name
         print('reload:', self.stepsNames)
         print('reload:', self.observationName, '\n')
@@ -59,4 +59,4 @@ class HERFEDplot:
         plt.title(title, fontsize=14)
         
         plt.show()
-        figFree.savefig(self.figName)
+        figFree.savefig(self.figName, dpi=300, bbox_inches='tight')
