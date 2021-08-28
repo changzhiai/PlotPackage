@@ -52,7 +52,6 @@ observationName = ["PdH",]
 HERdiagram = HERFEDplot(stepsNames, observationName, X, figName)
 HERdiagram.plot(title=sheet)
 
-
 #add metadata into pictures
 figNames = [figName]
 fmd = FigsMetaData(figNames, filename, sheet, min_col, max_col, min_row, max_row)
