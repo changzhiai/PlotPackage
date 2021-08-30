@@ -226,7 +226,7 @@ if __name__ == '__main__':
         plt.savefig('../data/CO2toCO_rate_vs_HOCO_CO.png', dpi=300)
         plt.show()
     
-    if 1: # test K1, K2, K3 using Cu(211) as an example
+    if 0: # test K1, K2, K3 using Cu(211) as an example
         N = 10
         dG1 = []
         dG2 = []
@@ -260,7 +260,7 @@ if __name__ == '__main__':
         plt.legend()
     
     #coverage
-    if 1:
+    if 0:
         N = 100
         Thetas1 = []
         Thetas2 = []
@@ -296,6 +296,44 @@ if __name__ == '__main__':
         plt.plot(U, Thetas3, color='blue', label='*')
         plt.xlabel(r'Potential (V)')
         plt.ylabel(r'Coverage (a.u.)')
+        plt.legend()
+    # jCO* vs. T
+    if 1:
+        N = 100
+        j = []
+        temper = np.linspace(100, 250, N)
+        for i, temp in enumerate(temper):
+            print('===============================')
+            print(temp)
+            # E_HOCO = -0.09
+            # E_CO = -0.72 # CO ads energy
+            E_HOCO = 0.43
+            E_CO = -0.36 # CO ads energy
+            # U = -0.0
+            k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, U, T=temp)
+            rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+            # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
+            thetas, rates = rm.solve()
+            # print(rates)
+            rate = min(jmax, rates[0])
+            rate = max(jmin, rate)
+            j.append(rate*22.2)
+            # R.append(np.log10(rate))
+            # print(thetas)
+            # Thetas1.append(thetas[0])
+            # Thetas2.append(thetas[1])
+            # Thetas3.append(thetas[2])
+            # dG1_s, dG2_s, dG3_s = -kB*T0*np.log(K1_s), -kB*T0*np.log(K2_s), -kB*T0*np.log(K3_s)
+            # print(ddG_HOCO, ddG_CO)
+            # print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
+            # print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
+        plt.figure(2, dpi=300)
+        plt.plot(temper, j, color='red', label='CO*')
+        # plt.plot(U, Thetas1, color='black', label='HOCO*')
+        # plt.plot(U, Thetas2, color='red', label='CO*')
+        # plt.plot(U, Thetas3, color='blue', label='*')
+        plt.xlabel(r'Temperature (K)')
+        plt.ylabel(r'j ($\mu A \cdot cm_{-2}$)')
         plt.legend()
 
     # plots

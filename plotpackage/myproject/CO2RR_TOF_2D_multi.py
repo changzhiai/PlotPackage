@@ -186,7 +186,7 @@ for j, E_CO in enumerate(E_CO_e):
         rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
         # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
         thetas, rates = rm.solve()
-        # print(rates)
+        print(rates)
         rate = min(jmax, rates[0])
         rate = max(jmin, rate)
         R[i,j] = np.log10(rate)
