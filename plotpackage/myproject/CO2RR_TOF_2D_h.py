@@ -301,14 +301,14 @@ if __name__ == '__main__':
     if 1:
         N = 100
         j = []
-        temper = np.linspace(100, 250, N)
+        temper = np.linspace(273, 373, N)
         for i, temp in enumerate(temper):
             print('===============================')
             print(temp)
-            # E_HOCO = -0.09
-            # E_CO = -0.72 # CO ads energy
-            E_HOCO = 0.43
-            E_CO = -0.36 # CO ads energy
+            E_HOCO = -0.09
+            E_CO = -0.72 # CO ads energy
+            #E_HOCO = 0.43
+            ##E_CO = -0.36 # CO ads energy
             # U = -0.0
             k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, U, T=temp)
             rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
@@ -317,7 +317,7 @@ if __name__ == '__main__':
             # print(rates)
             rate = min(jmax, rates[0])
             rate = max(jmin, rate)
-            j.append(rate*22.2)
+            j.append(k3)
             # R.append(np.log10(rate))
             # print(thetas)
             # Thetas1.append(thetas[0])
@@ -328,7 +328,7 @@ if __name__ == '__main__':
             # print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
             # print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
         plt.figure(2, dpi=300)
-        plt.plot(temper, j, color='red', label='CO*')
+        plt.semilogy(temper, j, color='red', label='CO*')
         # plt.plot(U, Thetas1, color='black', label='HOCO*')
         # plt.plot(U, Thetas2, color='red', label='CO*')
         # plt.plot(U, Thetas3, color='blue', label='*')
