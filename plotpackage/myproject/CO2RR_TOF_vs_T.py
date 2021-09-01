@@ -324,4 +324,3 @@ if __name__ == '__main__':
         plt.ylabel(r'j ($\mu A \cdot cm_{-2}$)')
         plt.legend()
         
-        
