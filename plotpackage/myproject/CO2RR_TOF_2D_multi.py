@@ -30,11 +30,13 @@ hplanck = 4.135669e-15 # eV s
 T0 = 297.15
 # T0 = 370
 Gact0 = Gact1 = Gact2 = 0.475 # activative free energy
-tc0 = tc1 = tc2 = 0.5  #???
+tc0 = tc1 = tc2 = 1  #transition coefficiency
 A_act1 = np.exp( - Gact1 / ( kB * T0 ) ) # 
 A_act2 = np.exp( - Gact2 / ( kB * T0 ) ) # electrochemical prefactor, fitting
 G_1act_cap = -Gact1
 G_2act_cap = -Gact2
+
+A_prior = 3.6 * 10**4
 
 nu_e = kB * T0 / hplanck
 nu_c = 1.e13
@@ -42,7 +44,7 @@ nu_c = 1.e13
 cHp0 = 10.**(-0.)
 UHER0 = URHE0 = kB * T0 * np.log(cHp0)   # introduced to shift the plotted potential window to the relevant range w
 
-U0 = -0.4 # applied potential vs. she
+U0 = -0.5 # applied potential vs. she
 U = U0 + UHER0
 
 ddG_HOCO = 0.414 # correction from binding energy to free energy
@@ -82,7 +84,9 @@ def get_k1(nu, E_HOCO, U, T=T0, tc=tc1):
     Urev_rhe = -dG_rhe
     # dG_she = dG_rhe 
     # Urev_she = -dG_she + UHER0
-    k1 = nu * A_act1 * exp( - max( ( U - Urev_rhe ) * tc, G_1act_cap) * beta ) 
+    k1 = A_prior * exp( - max( ( U - Urev_rhe ) * tc, G_1act_cap) * beta ) 
+    # k1 = nu * A_act1 * exp( - max( ( U - Urev_rhe ) * tc, G_1act_cap) * beta ) 
+    
     #k1 = nu * A_act1 * exp( - min( ( U - dG_she ) * tc, 0) * beta ) 
     #dGw =  - kB * T * np.log(Kw)
     #dG = 0. * Gact0 + ddG_HOCO + E_HOCO + dGw
@@ -98,7 +102,8 @@ def get_k2(nu, E_HOCO, E_CO, U, T=T0, tc=tc2):
     Urev_rhe = -dG_rhe
     # dG_she = dG_rhe
     # Urev_she = - dG_she + URHE0
-    k2 = nu * A_act2 * exp( - max(( U - Urev_rhe ) * tc, G_2act_cap) * beta ) 
+    k2 = A_prior * exp( - max(( U - Urev_rhe ) * tc, G_2act_cap) * beta ) 
+    # k2 = nu * A_act2 * exp( - max(( U - Urev_rhe ) * tc, G_2act_cap) * beta ) 
     return k2
 
 def get_k3(nu, E_CO, U, T=T0, tc=tc0):
@@ -164,7 +169,8 @@ def get_rates(nu_e, nu_c, E_HOCO, E_CO, U, T=T0):
 # }
 
 pCO2 = 1.
-pCO =  1.
+# pCO =  1.
+pCO =  0.005562
 xH2O = 1.
 cHp = cHp0 #1.
 # N = 20*4
