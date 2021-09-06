@@ -44,7 +44,7 @@ nu_c = 1.e13
 cHp0 = 10.**(-0.)
 UHER0 = URHE0 = kB * T0 * np.log(cHp0)   # introduced to shift the plotted potential window to the relevant range w
 
-U0 = -0.5 # applied potential vs. she
+U0 = -0.4 # applied potential vs. she
 U = U0 + UHER0
 
 ddG_HOCO = 0.414 # correction from binding energy to free energy

@@ -163,7 +163,7 @@ if __name__ == '__main__':
     cHp = cHp0 #1.
     
     # volcano plot
-    if 1:
+    if 0:
         # N = 20*4
         # M = 30*4
         N = 20*4
@@ -297,8 +297,43 @@ if __name__ == '__main__':
         plt.xlabel(r'Potential (V)')
         plt.ylabel(r'Coverage (a.u.)')
         plt.legend()
-    # jCO* vs. T
+    #rate vs. U
     if 1:
+        N = 100
+        R = []
+        U = np.linspace(-2, 0, N)
+        # jmax = 10.0e3 # exptl current plateau's at 10 mA/cm2 
+        # jmin = 0.1
+        for i, u in enumerate(U):
+            print('===============================')
+            print(u)
+            E_HOCO = -0.08
+            E_CO = -0.54 # CO ads energy
+            # E_HOCO = 0.43
+            # E_CO = -0.36 # CO ads energy
+            # U = -0.0
+            k1, K1, k2, K2, k3, K3 = get_rates(nu_e, nu_c, E_HOCO, E_CO, u, T=T0)
+            rm = CO2toCO(pCO2, pCO, xH2O, cHp, k1, K1, k2, K2, k3, K3)
+            # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
+            thetas, rates = rm.solve()
+            # print(rates)
+            # rate = min(jmax, rates[0])
+            # rate = max(jmin, rate)
+            # R.append(np.log10(rates[0]))
+            R.append(rates[0])
+            # print(thetas)
+            
+            # dG1_s, dG2_s, dG3_s = -kB*T0*np.log(K1_s), -kB*T0*np.log(K2_s), -kB*T0*np.log(K3_s)
+            # print(ddG_HOCO, ddG_CO)
+            # print(dG1, dG1 + dG2, dG1 + dG2 + dG3)
+            # print(dG1_s, dG1_s + dG2_s, dG1_s + dG2_s + dG3_s)
+        plt.figure(2, dpi=300)
+        plt.plot(U, R, color='black', label='')
+        plt.xlabel(r'Potential (V)')
+        plt.ylabel(r'log$_{10}$(j/$\mu$Acm$^{-2}$)')
+        plt.legend()
+    # jCO* vs. T
+    if 0:
         N = 100
         j = []
         temper = np.linspace(273, 373, N)
@@ -315,8 +350,8 @@ if __name__ == '__main__':
             # rm = CO2toCO(pCO2, pCO, xH2O, cOHm, k1, K1, k2, K2, k3, K3, T0)
             thetas, rates = rm.solve()
             # print(rates)
-            rate = min(jmax, rates[0])
-            rate = max(jmin, rate)
+            # rate = min(jmax, rates[0])
+            # rate = max(jmin, rate)
             j.append(k3)
             # R.append(np.log10(rate))
             # print(thetas)
