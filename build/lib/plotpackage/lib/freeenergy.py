@@ -15,7 +15,7 @@ from scipy.interpolate import interp1d
 class EnergyDiagram:
     def __init__(self, aspect='equal'):
         # plot parameters
-        self.ratio = 1.6181 #1.5
+        # self.ratio = 1.6181 #1.5
         self.dimension = 'auto'
         self.space = 'auto'
         self.offset = 'auto'
@@ -33,10 +33,13 @@ class EnergyDiagram:
         self.left_texts = []        
         self.links = []
         self.barriers = []
+        self.ts_energies = []
+        self.all_energies = []
+        
         # matplotlib fiugre handlers
-        self.fig = None
+        # self.fig = None
         self.ax = None
-        self.label = []
+        self.label = []   
 
     def add_level(self, energy, bottom_text='', position=None, color='k',
                   top_text='', right_text='', left_text='', label=''):
@@ -73,14 +76,31 @@ class EnergyDiagram:
         
         self.links[start_level_id].append((end_level_id, ls, linewidth, color))
         #print(self.links)
+    
+    def remove_link(self, start_level_id, end_level_id):
+        
+        for i, link in enumerate(self.links):
+            for j in link: 
+                if start_level_id == i and end_level_id == j[0]:
+                    self.links[i].remove(j)
         
     def add_barrier(self, start_level_id, barrier, end_level_id, color='k', ls='--', linewidth=1, ):
         
+        self.ts_energies.append(barrier)       
         self.barriers[start_level_id].append((end_level_id, barrier, ls, linewidth, color))
         #print(self.barrier)
+        
+    def remove_barrier(self, start_level_id, end_level_id):
+        print(self.barriers)
+        for i, barrier in enumerate(self.barriers):
+            for j in barrier:        
+                if start_level_id == i and end_level_id == j[0]:
+                    self.barriers[i].remove(j)
+                    print('run this line')
+        print('\n after removing', self.barriers)
 
-    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None):
-
+    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title='', ratio=1.6181):
+        self.ratio = ratio
         # Create a figure and axis if the user didn't specify them.
         if not ax:
             fig = plt.figure(figsize=(8,6), dpi = 300)
@@ -88,7 +108,7 @@ class EnergyDiagram:
         # Otherwise register the axes and figure the user passed.
         else:
             self.ax = ax
-            self.fig = ax.figure
+            # self.fig = ax.figure
             # Constrain the target axis to have the proper aspect ratio
             self.ax.set_aspect(self.aspect)
 
@@ -104,6 +124,7 @@ class EnergyDiagram:
         ax.spines['top'].set_visible(True)
         ax.spines['right'].set_visible(True)
         ax.spines['bottom'].set_visible(True)
+        plt.title(title, fontsize=14)
         for axis in ['top','bottom','left','right']:
             ax.spines[axis].set_linewidth(1.2) #linewith of frame
 
@@ -162,7 +183,8 @@ class EnergyDiagram:
                 start = level[1]*(self.dimension+self.space)
                 ax.text(start, level[0]+self.offset, str(ind),
                         horizontalalignment='right', color='red')
-
+        
+        #print(self.links)
         # add connection line
         for idx, link in enumerate(self.links):
             # here we connect the levels with the links
@@ -204,7 +226,8 @@ class EnergyDiagram:
                               ls=i[2],
                               linewidth=i[3],
                               color=i[4])
-                ax.add_line(line)
+                #ax.add_line(line)
+        return pos #return x ticks values
 
 
     def __auto_adjust(self):
@@ -221,7 +244,8 @@ class EnergyDiagram:
 
         '''
         # Max range between the energy
-        Energy_variation = abs(max(self.energies) - min(self.energies))
+        self.all_energies = self.energies + self.ts_energies
+        Energy_variation = abs(max(self.all_energies) - min(self.all_energies))
         if self.dimension == 'auto' or self.space == 'auto':
             # Unique positions of the levels
             unique_positions = float(len(set(self.positions)))

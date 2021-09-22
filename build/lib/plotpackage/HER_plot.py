@@ -6,8 +6,7 @@ Created on Sat Mar 13 22:32:16 2021
 """
 
 from plotpackage.lib.io import read_excel, read_csv
-from plotpackage.lib.freeenergy import EnergyDiagram
-from plotpackage.lib.HER import HERplot
+from plotpackage.lib.HER import HERFEDplot
 from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 
@@ -30,7 +29,7 @@ figName = './pictures/HER_FreeEnergy_' + sheet + '.jpg'  #free energy diagram na
 
 stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, min_row, max_row) #load excel data
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
-HERdiagram = HERplot(stepsNames, observationName, X, figName)
+HERdiagram = HERFEDplot(stepsNames, observationName, X, figName)
 HERdiagram.plot()
 
 
