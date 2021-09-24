@@ -9,6 +9,10 @@ from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.HER import HERFEDplot
 from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
+# plot interactive
+# import matplotlib
+# matplotlib.use('qt5agg')
+
 
 ############only part needs to change##############
 filename = '../data/HER.xlsx'
