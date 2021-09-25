@@ -35,7 +35,6 @@ stepsNames, observationName, X = read_excel(filename, sheet, min_col, max_col, m
 #stepsNames, observationName, X = read_csv(filename, , min_col, max_col) #load csv data
 
 
-
 #choose some rows
 # # ranges = range(4,25,6) # choose one every 6 lines
 # #ranges = [3,15,7,5]
