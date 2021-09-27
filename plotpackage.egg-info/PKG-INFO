@@ -1,4 +1,4 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: plotpackage
 Version: 1.1
 Summary: plot toolbox
@@ -6,5 +6,8 @@ Home-page: None
 Author: Changzhi Ai
 Author-email: changai@dtu.dk
 License: MIT
-Description: UNKNOWN
 Platform: UNKNOWN
+License-File: LICENSE
+
+UNKNOWN
+
