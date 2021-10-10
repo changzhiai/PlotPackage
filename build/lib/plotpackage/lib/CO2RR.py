@@ -66,7 +66,7 @@ class CO2RRFEDplot:
         if start_id != None and end_id != None:
             self.diagram.remove_link(start_id, end_id)
     
-    def plot(self, ax: plt.Axes = None, title='', save = False, legandSize = 14, text='', ratio=1.6181):
+    def plot(self, ax: plt.Axes = None, title='', save = False, legend=True, legendSize = 14, text='', ratio=1.6181):
         if not ax:
             figFree = plt.figure(figsize=(8, 6), dpi = 300)
             axFree = figFree.add_subplot(111)
@@ -82,7 +82,8 @@ class CO2RRFEDplot:
         # for specis in range(len(self.observationName)):
         for i, specis in enumerate(self.observationName):
             plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= specis)
-        plt.legend(fontsize=legandSize)
+        if legend == True:
+            plt.legend(fontsize=legendSize)
         plt.title(title, fontsize=14)
         plt.text(0.04, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=axFree.transAxes, fontsize=14, fontweight='bold')        
         axFree.yaxis.set_label_coords(-0.1, 0.5)

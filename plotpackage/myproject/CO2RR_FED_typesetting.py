@@ -7,7 +7,7 @@ Created on Wed Aug  4 15:34:30 2021
 
 #import parent dirs for local
 import sys
-sys.path.append("../..")
+sys.path.append("../../")
 
 from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.CO2RR import CO2RRFEDplot
@@ -15,6 +15,7 @@ from plotpackage.lib.scalingrelation import ScalingRelationPlot
 from plotpackage.lib.figsmetadata import FigsMetaData
 import matplotlib.pyplot as plt
 import numpy as np
+from plotpackage.lib.styles import colorList
 
 filename = '../data/CO2RR.xlsx'
 #change it for excel and csv; ignore sheet, min_row, max_row, row_of_tag and col_of_ini_tag for csv
@@ -26,7 +27,7 @@ figName1 = '../pictures/CO2RR_FreeEnergy_typesetting.jpg'  #free energy diagram 
 figName2 = '../pictures/ScalingRelation_typesetting.jpg' #scaling reation figure name
 
 i = 0
-fig = plt.figure(figsize=(18, 16), dpi = 300)
+fig = plt.figure(figsize=(18, 10), dpi = 300)
 text = ['Single', 'Line', 'Triangle', 'Parall.', 'Island', 'Overlayer']
 # col1 = [2, 2, 2, 3, 3, 5] #column in excel
 # col2 = [3, 5, 4, 5, 4, 4] #column in excel
@@ -84,7 +85,7 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     X = np.delete(X, del_list, 0)
     
     M  = 3
-    ax = plt.subplot(3, 3, i + 1)
+    ax = plt.subplot(2, 3, i + 1)
     
     descriper1 = (X[:, col1]).astype(float) 
     descriper2 = (X[:, col2]).astype(float) 
@@ -93,10 +94,17 @@ for types in ['top-new', 'line', 'triangle', 'paral-new', 'island-new', 'overly-
     stepsNames = ['* + CO$_{2}$', 'HOCO*', 'CO*', '* + CO']  #reload step name for CO2RR
     
     CO2RRdiagram = CO2RRFEDplot(stepsNames, observationName, X, figName1)
-    CO2RRdiagram.plot(ax = ax, title='', save=False, legandSize = 9., text = text[i], ratio=1.4)
+    CO2RRdiagram.plot(ax = ax, title='', save=False, legend=False, legendSize = 9., text = text[i], ratio=1.4)
     
     i = i +1
-    
+
+# for i, specis in enumerate(['Fe', 'Ru', 'Zr', 'Y', 'Mn', 'Nb', 'Zn' ]):
+#     plt.hlines(0.1, 1, 2, color=colorList[specis], label= specis)
+# plt.legend(fontsize=9.)
+lines, labels = fig.axes[0].get_legend_handles_labels()
+fig.legend(lines, labels, loc = 'lower left', ncol=9, mode="expand", borderaxespad=0.,bbox_to_anchor=(0.1, 0, 0.8, 1.02))
+
+
 plt.show()
 #choose some rows
 # # ranges = range(4,25,6) # choose one every 6 lines
