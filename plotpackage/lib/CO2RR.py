@@ -68,7 +68,7 @@ class CO2RRFEDplot:
         if start_id != None and end_id != None:
             self.diagram.remove_link(start_id, end_id)
     
-    def plot(self, ax: plt.Axes = None, title='', save = False, legend=True, legendSize = 14, text='', ratio=1.6181):
+    def plot(self, ax: plt.Axes = None, title='', save = False, legend=True, legendSize = 14, text='', ratio=1.6181, ymin=None, ymax=None):
         if not ax:
             figFree = plt.figure(figsize=(8, 6), dpi = 300)
             axFree = figFree.add_subplot(111)
@@ -78,8 +78,9 @@ class CO2RRFEDplot:
             # self.fig = ax.figure
            
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio) # this is the default ylabel
-        
+        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio, ymin=ymin, ymax=ymax) # this is the default ylabel
+        if ymin != None and ymax != None:
+            plt.ylim(ymin, ymax)
         # add legend
         # for specis in range(len(self.observationName)):
         for i, specis in enumerate(self.observationName):
@@ -94,5 +95,6 @@ class CO2RRFEDplot:
         if save == True: 
             plt.show()
             figFree.savefig(self.figName, dpi=300, bbox_inches='tight')
-        
+        # print('test:', pos[0])
         # return figFree
+        # return pos[0], pos[-1]
