@@ -11,12 +11,15 @@ install_requires = [
     'numpy>=1.15.0',
     'scipy>=1.1.0',
     'matplotlib>=2.2.0',
+    'xlrd==1.2.0',
+    'pandas>=1.2.4',
+    'ase>=3.16.2',
 ]
 
 
 setup(
     name="plotpackage",
-    version='1.1',
+    version='1.2',
     description="plot toolbox",
     url="None",
     author="Changzhi Ai",
