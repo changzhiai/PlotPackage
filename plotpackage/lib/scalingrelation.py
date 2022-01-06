@@ -7,6 +7,7 @@ Created on Sun Mar 14 01:06:31 2021
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
 import numpy as np
+from plotpackage.lib.styles import colorList
 
 class ScalingRelationPlot:
     def __init__(self, descriper1, descriper2, obsername, figname):
@@ -15,6 +16,7 @@ class ScalingRelationPlot:
         self.descriper2 = descriper2
         self.observationName = obsername
         self.figName = figname
+        self.colorList = colorList
         
     def plot(self, ax: plt.Axes = None, dotcolor='black', linecolor='red', save = False, xlabel='*HOCO', ylabel='*CO', title='', text=''):                
         # print('scaling relation:')
@@ -33,16 +35,25 @@ class ScalingRelationPlot:
         #fig = plt.figure(figsize=(8, 6), dpi = 300)
         #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
         
-        # add element tags
-        if isinstance(dotcolor, dict)==True:
-            for i, name in enumerate(self.observationName):
-                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor[name])  #plot dots
-                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-        else:
-            plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
-            for i, name in enumerate(self.observationName):
+        for i, name in enumerate(self.observationName):
+            try:
+                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=self.colorList[name])  #plot dots
+                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=self.colorList[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+            except:
+                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor)  #plot dots
                 plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-                
+
+        # add element tags
+        if False: #detached
+            if isinstance(dotcolor, dict)==True:
+                for i, name in enumerate(self.observationName):
+                    plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor[name])  #plot dots
+                    plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+            else:
+                plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
+                for i, name in enumerate(self.observationName):
+                    plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+                    
 
         # plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
         plt.xlabel(xlabel, fontsize=14)

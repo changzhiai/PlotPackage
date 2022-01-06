@@ -8,6 +8,8 @@ Created on Sun Mar 14 00:31:10 2021
 from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.freeenergy import EnergyDiagram
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import cm
+import numpy as np
 from matplotlib.ticker import FormatStrFormatter
 from plotpackage.lib.styles import colorList
 
@@ -37,13 +39,14 @@ class CO2RRFEDplot:
         #                   'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen', 'Cd': 'steelblue', 'Hf': 'slateblue', \
         #                   'Ta': 'violet', 'W': 'deeppink', 'Re': 'palevioletred'}
         self.colorList = colorList
+        self.defaultColor=cm.rainbow(np.linspace(0,1,len(self.observationName)))
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
         #self.stepsNames = ['* + $H^+$', '*H', '* + 1/2$H_2$',]  #reload step name for HER
         #self.observationName = ["Pure", "Ni", "Co", "V", "Cr", "Mn", "Fe", "Pt"]  #reload specis name
-        print('reload:', self.stepsNames)
-        print('reload:', self.observationName, '\n')
+        print('reload stepsName:', self.stepsNames)
+        print('reload obserName:', self.observationName, '\n')
         
         self.diagram = EnergyDiagram()
         count = 0
@@ -54,11 +57,16 @@ class CO2RRFEDplot:
                 count += 1
                 if step == 0:
                     self.diagram.pos_number = 0
-                
-                self.diagram.add_level(self.X[i][step], color = self.colorList[specis])
+                try:
+                    self.diagram.add_level(self.X[i][step], color = self.colorList[specis])
+                except:
+                    self.diagram.add_level(self.X[i][step], color = self.defaultColor[i])
         
                 if count % (len(self.stepsNames)) != 0:
-                    self.diagram.add_link(count-1, count, color = self.colorList[specis])
+                    try:
+                        self.diagram.add_link(count-1, count, color = self.colorList[specis])
+                    except:
+                        self.diagram.add_link(count-1, count, color = self.defaultColor[i])
     
     def add_link(self, start_id=None, end_id=None, color='k', linestyle='--', linewidth=1):
         if start_id != None and end_id != None:  #pos starts from 0
@@ -84,7 +92,10 @@ class CO2RRFEDplot:
         # add legend
         # for specis in range(len(self.observationName)):
         for i, specis in enumerate(self.observationName):
-            plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= specis)
+            try:
+                plt.hlines(0.1, pos[0], pos[0], color=self.colorList[specis], label= specis)
+            except:
+                plt.hlines(0.1, pos[0], pos[0], color=self.defaultColor[i], label= specis)
         if legend == True:
             plt.legend(fontsize=legendSize)
         plt.title(title, fontsize=14)
