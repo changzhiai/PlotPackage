@@ -4,6 +4,8 @@ Created on Tue Jan  4 13:55:28 2022
 
 @author: changai
 """
+import sys
+sys.path.append("../..")
 
 from ase.db import connect
 import pandas as pd
