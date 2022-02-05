@@ -28,14 +28,14 @@ H2O(g) + * -> OH* + H+ + e-       (dG5)
 dG5 = G_OH + 1/2 G_H2g - G* - G_H2O(g)
 Gb_OH = dG5
 
-Pd45Nb9H54 -> Pd54H54 - 9*Pd2+ + 9*Nb3+ + 9*e-         (dG6)
-dG6 = G_Pd64H64 - 9*G_Pd2+ + 9*G_Nb3+ - 9*eU - G_Pd55Nb9H64
+Pd45Ti9H54 -> Pd54H54 - 9*Pd2+ + 9*Ti3+ + 9*e-         (dG6)
+dG6 = G_Pd54H54 - 9*G_Pd2+ + 9*G_Ti3+ - 9*eU - G_Pd45Ti9H54
 
-for remove one Nb atom on the overlayer surface:
-Pd45Nb9H54 -> Pd45Nb8H54 + Nb3+ + 3*e-         (dG6)
+for remove one Ti atom on the overlayer surface:
+Pd45Ti9H54 -> Pd45Ti8H54 + Ti3+ + 3*e-         (dG6)
 
-for remove first Nb bilayer on the overlayer surface:
-Pd45Nb9H54 -> Pd45H45 + 9*Nb3+ + 27*e- + 9*H+ + 9*e-    (dG6)
+for remove first Ti bilayer on the overlayer surface:
+Pd45Ti9H54 -> Pd45H45 + 9*Ti3+ + 27*e- + 9*H+ + 9*e-    (dG6)
 
 G = E_dft + E_zpe + C_p - TS
 
@@ -72,20 +72,22 @@ def pourbaix_diagram(U, pH):
     G_H2g = -7.096
 
     
-    # for Nb in configuration of overlayer
+    # for Ti in configuration of overlayer
     E_Pd54H54 = -285.3708828
-    E_Pd45Nb9H54 = -336.2919741 # Nb overlayer
-    E_Pd45Nb8H54 = -327.95832335 # remove 1 Nb
-    E_Pd45H45 = -236.30774029 # remove first bilayer
+    E_Pd50Ti4H54 = -305.3263439 # Ti parallelogram
+    E_Pd50Ti3H54 = -297.69180749 # remove 1 Ti
+    E_Pd50H50 = -262.23018405 # remove first bilayer
+    
     E_Pd_bulk = -1.950920655
-    E_Nb_bulk = -7.244883085
+    E_Ti_bulk = -7.244883085
     G_Pd2plus = E_Pd_bulk + 2 * 0.915 + 0.0592 * np.log(10**(-6))
-    G_Nb3plus = E_Nb_bulk + 3 * 0.915 + 0.0592 * np.log(10**(-6))
-    dG1 = 0.624
-    dG2 = -0.725
-    dG3 = -0.224
-    dG4 = 0.467
-    dG5 = -0.132
+    G_Ti3plus = E_Ti_bulk + 3 * 0.915 + 0.0592 * np.log(10**(-6))
+    G_Ti2plus = E_Ti_bulk + 2 * 0.915 + 0.0592 * np.log(10**(-6))
+    dG1 = 0.509
+    dG2 = -0.674
+    dG3 = -0.288
+    dG4 = 0.407
+    dG5 = -0.222
     
     # for pure PdH
     # dG1 = 0.820
@@ -115,9 +117,9 @@ def pourbaix_diagram(U, pH):
     Gb_COs = []
     Gb_Hs = []
     Gb_OHs = []
-    G_Nb_overly_to_Pds = []
-    G_rm_one_Nbs = []
-    G_rm_first_bilayer_Nbs = []
+    G_Ti_overly_to_Pds = []
+    G_rm_one_Tis = []
+    G_rm_first_bilayer_Tis = []
     bare_PdHs = [] 
     colors = []
     Us_acc = np.zeros(8) # accumulate U in order to calculate average U
@@ -133,13 +135,18 @@ def pourbaix_diagram(U, pH):
             Gb_H = dG4 + u + kB * T * ph * np.log(10)
             Gb_OH = dG5 - u - kB * T * ph * np.log(10)
             
-            G_Nb_overly_to_Pd = (E_Pd54H54 - 9*G_Pd2plus + 9*G_Nb3plus - 9*u - E_Pd45Nb9H54) / 9.0 # replace Nb overlayer to Pd overlayer
-            G_rm_one_Nb = E_Pd45Nb8H54 + G_Nb3plus - 3*u - E_Pd45Nb9H54
-            G_rm_first_bilayer_Nb = (E_Pd45H45 + 9*G_Nb3plus - 36*u + 9*0.5*G_H2g - E_Pd45Nb9H54 - 9 * kB * T * ph * np.log(10))/ 9.0
-            # G_rm_first_bilayer_Nb = 0
+            G_Ti_overly_to_Pd = (E_Pd54H54 - 4*G_Pd2plus + 4*G_Ti3plus - 4*u - E_Pd50Ti4H54) / 9.0 # replace Ti overlayer to Pd overlayer
+            G_rm_one_Ti = E_Pd50Ti3H54 + G_Ti3plus - 3*u - E_Pd50Ti4H54
+            G_rm_first_bilayer_Ti = (E_Pd50H50 + 4*G_Ti3plus - 16*u + 4*0.5*G_H2g - E_Pd50Ti4H54 + 4 * kB * T * ph * np.log(10))/ 9.0
+            # G_rm_first_bilayer_Ti = 0
             
+            # G_Ti_overly_to_Pd = (E_Pd54H54 - 4*G_Pd2plus + 4*G_Ti2plus - E_Pd50Ti4H54) / 4.0 # replace Ti overlayer to Pd overlayer
+            # G_Ti_overly_to_Pd = 0
+            # G_rm_one_Ti = E_Pd50Ti3H54 + G_Ti2plus - 2*u - E_Pd50Ti4H54
+            # G_rm_first_bilayer_Ti = (E_Pd50H50 + 4*G_Ti2plus - 12*u + 4*0.5*G_H2g - E_Pd50Ti4H54 - 4 * kB * T * ph * np.log(10))/ 4.0
+            # G_rm_first_bilayer_Ti = 0
             
-            # Pd45Nb9H54 -> Pd45H45 + 9*Nb3+ + 27*e- + 9*H+ + 9*e-
+            # Pd45Ti9H54 -> Pd45H45 + 9*Ti3+ + 27*e- + 9*H+ + 9*e-
             # print(u, Gb_HOCO)
             # plt.scatter(u, Gb_HOCO)
             Us.append(u)
@@ -155,12 +162,12 @@ def pourbaix_diagram(U, pH):
             Gb_COs.append(Gb_CO)
             Gb_Hs.append(Gb_H)
             Gb_OHs.append(Gb_OH)
-            G_Nb_overly_to_Pds.append(G_Nb_overly_to_Pd)
-            G_rm_one_Nbs.append(G_rm_one_Nb)
-            G_rm_first_bilayer_Nbs.append(G_rm_first_bilayer_Nb)
+            G_Ti_overly_to_Pds.append(G_Ti_overly_to_Pd)
+            G_rm_one_Tis.append(G_rm_one_Ti)
+            G_rm_first_bilayer_Tis.append(G_rm_first_bilayer_Ti)
             bare_PdHs.append(bare_PdH)
             
-            min_dot = min(Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_Nb_overly_to_Pd, G_rm_one_Nb, G_rm_first_bilayer_Nb, bare_PdH)
+            min_dot = min(Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_Ti_overly_to_Pd, G_rm_one_Ti, G_rm_first_bilayer_Ti, bare_PdH)
             
             if min_dot == Gb_HOCO:
                 color = 'blue'
@@ -182,17 +189,17 @@ def pourbaix_diagram(U, pH):
                 Us_acc[3] += u
                 pHs_acc[3] += ph
                 count[3] += 1
-            elif min_dot == G_Nb_overly_to_Pd:
+            elif min_dot == G_Ti_overly_to_Pd:
                 color = 'red'
                 Us_acc[4] += u
                 pHs_acc[4] += ph
                 count[4] += 1
-            elif min_dot == G_rm_one_Nb:
+            elif min_dot == G_rm_one_Ti:
                 color = 'olive'
                 Us_acc[5] += u
                 pHs_acc[5] += ph
                 count[5] += 1
-            elif min_dot == G_rm_first_bilayer_Nb:
+            elif min_dot == G_rm_first_bilayer_Ti:
                 color = 'gray'
                 Us_acc[6] += u
                 pHs_acc[6] += ph
@@ -212,9 +219,9 @@ def pourbaix_diagram(U, pH):
         plt.plot(Us, Gb_COs, label='Gb_COs', color = 'orange')
         plt.plot(Us, Gb_Hs, label='Gb_Hs', color = 'green')
         plt.plot(Us, Gb_OHs, label='Gb_OHs', color = 'brown')
-        plt.plot(Us, G_Nb_overly_to_Pds, label='G_Nb_overly_to_Pd', color = 'red')
-        plt.plot(Us, G_rm_one_Nbs, label='G_rm_one_Nb', color = 'olive')
-        plt.plot(Us, G_rm_first_bilayer_Nbs, label='G_rm_first_bilayer_Nb', color = 'gray')
+        plt.plot(Us, G_Ti_overly_to_Pds, label='G_Ti_overly_to_Pd', color = 'red')
+        plt.plot(Us, G_rm_one_Tis, label='G_rm_one_Ti', color = 'olive')
+        plt.plot(Us, G_rm_first_bilayer_Tis, label='G_rm_first_bilayer_Ti', color = 'gray')
         plt.plot(Us, bare_PdHs, label='bare_PdH', color = 'yellow')
         plt.xlabel('$U_{SHE}$')
         plt.ylabel('$\Delta G$ (eV/per adsorbate)')
@@ -224,7 +231,7 @@ def pourbaix_diagram(U, pH):
         plt.scatter(pHs, Us, c=colors, marker='o', zorder=2)
         plt.xlabel('pH')
         plt.ylabel('$U_{SHE}$ (V)')
-        for i, txt in enumerate(['Gb_HOCOs', 'Gb_COs', 'Gb_Hs', 'Gb_OHs', 'G_Nb_overly_to_Pd', 'G_rm_one_Nb', 'G_rm_first_bilayer_Nb', 'bare_PdH']):
+        for i, txt in enumerate(['Gb_HOCOs', 'Gb_COs', 'Gb_Hs', 'Gb_OHs', 'G_Ti_overly_to_Pd', 'G_rm_one_Ti', 'G_rm_first_bilayer_Ti', 'bare_PdH']):
             x = pHs_acc[i]/count[i]
             y = Us_acc[i]/count[i] 
             plt.text(x, y, txt, horizontalalignment='center')
