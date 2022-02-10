@@ -59,7 +59,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib
 plt.rcParams.update({'mathtext.default':  'regular', 'figure.dpi': 150})
-matplotlib.use('TkAgg')
+# matplotlib.use('TkAgg')
 
 def pourbaix_diagram(U, pH, system):
 # def pourbaix_diagram(U, pH, Nb_overly=False, Ti_overly=False, Ti_paral=False, Pd_pure=False):
@@ -102,7 +102,8 @@ def pourbaix_diagram(U, pH, system):
     G_Nb_OH_4 = E_Nb_bulk + 4 * G_H2Og - 2 * G_H2g + 5*(-0.537) + 0.0592 * np.log(10**(-6))
     # G_Ti2plus = E_Ti_bulk + 2 * (-1.63) + 0.0592 * np.log(10**(-6))
     G_Ti2plus = E_Ti_bulk + 2 * (-1.628) + 0.0592 * np.log(10**(-6))
-    G_Ti3plus = E_Ti_bulk + 3 * (-1.26) + 0.0592 * np.log(10**(-6))
+    # G_Ti3plus = E_Ti_bulk + 3 * (-1.26) + 0.0592 * np.log(10**(-6))
+    G_Ti3plus = G_Ti2plus + (-0.369) + 0
     # G_Ti2plus = E_Ti_bulk + 2 * (-1.60) + 0.0592 * np.log(10**(-6))
     # G_Ti3plus = E_Ti_bulk + 3 * (-1.37) + 0.0592 * np.log(10**(-6))
     G_Ti_OH_2 = E_Ti_bulk + 2 * G_H2Og - G_H2g + 4*(-1) + 0.0592 * np.log(10**(-6))
@@ -237,8 +238,8 @@ def pourbaix_diagram(U, pH, system):
                 G_rm_one_M_OH_2 = E_Pd45Ti8H54 + G_Ti_OH_2 + G_H2g - 4*u - 2*G_H2Og - E_Pd45Ti9H54 - 2 * kB * T * ph * np.log(10)
                 G_rm_one_M_OH_2s.append(G_rm_one_M_OH_2)
                 
-                G_values = [Gb_HOCO, Gb_CO_ref_e, Gb_H, Gb_OH, G_rm_one_M2_H, bare_PdH]
-                # G_values = [Gb_HOCO, Gb_CO_ref_e, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
+                # G_values = [Gb_HOCO, Gb_CO_ref_e, Gb_H, Gb_OH, G_rm_one_M2_H, bare_PdH]
+                G_values = [Gb_HOCO, Gb_CO_ref_e, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, G_rm_one_M3, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M_OH_2, bare_PdH]
@@ -305,60 +306,60 @@ def pourbaix_diagram(U, pH, system):
             colors.append(color)
             
     if system == 'Nb_overly':
-        tuples = {'Gb_HOCOs': Gb_HOCOs,
+        tuples = {'HOCO*': Gb_HOCOs,
                   # 'Gb_CO_ref_es': Gb_CO_ref_es,
-                  'Gb_COs': Gb_COs,
-                  'Gb_Hs': Gb_Hs,
-                  'Gb_OHs': Gb_OHs,
+                  'CO*': Gb_COs,
+                  'H*': Gb_Hs,
+                  'OH*': Gb_OHs,
                   # 'G_rm_one_M2': G_rm_one_M2s,
                    # 'G_rm_one_M3': G_rm_one_M3s,
                    # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                     # 'G_rm_one_M_OH_4': G_rm_one_M_OH_4s,
-                  'G_rm_one_M3_H': G_rm_one_M3_Hs,
-                  'bare_PdH': bare_PdHs
+                  'Nb$^{3+}$': G_rm_one_M3_Hs,
+                  'Bare surface': bare_PdHs
                   }
     elif system == 'Ti_overly':
-        tuples = {'Gb_HOCOs': Gb_HOCOs,
+        tuples = {'HOCO*': Gb_HOCOs,
                   # 'Gb_CO_ref_es': Gb_CO_ref_es,
-                  'Gb_COs': Gb_COs,
-                  'Gb_Hs': Gb_Hs,
-                  'Gb_OHs': Gb_OHs,
+                  'CO*': Gb_COs,
+                  'H*': Gb_Hs,
+                  'OH*': Gb_OHs,
                    # 'G_rm_one_M2': G_rm_one_M2s,
                    # 'G_rm_one_M3': G_rm_one_M3s,
                   # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                   # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                    # 'G_rm_one_M_OH_2': G_rm_one_M_OH_2s,
-                   'G_rm_one_M2_H': G_rm_one_M2_Hs,
-                #    'G_rm_one_M3_H': G_rm_one_M3_Hs,
-                  'bare_PdH': bare_PdHs
+                   'Ti$^{2+}$': G_rm_one_M2_Hs,
+                   'Ti$^{3+}$': G_rm_one_M3_Hs,
+                  'Bare surface': bare_PdHs
                   }
     elif system == 'Ti_paral':
-        tuples = {'Gb_HOCOs': Gb_HOCOs,
+        tuples = {'HOCO*': Gb_HOCOs,
                   # 'Gb_CO_ref_es': Gb_CO_ref_es,
-                  'Gb_COs': Gb_COs,
-                  'Gb_Hs': Gb_Hs,
-                  'Gb_OHs': Gb_OHs,
+                  'CO*': Gb_COs,
+                  'H*': Gb_Hs,
+                  'OH*': Gb_OHs,
                   # 'G_rm_one_M2': G_rm_one_M2s,
                   # 'G_rm_one_M3': G_rm_one_M3s,
                   # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                   # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
-                   'G_rm_one_M2_H': G_rm_one_M2_Hs,
-                   'G_rm_one_M3_H': G_rm_one_M3_Hs,
-                  'bare_PdH': bare_PdHs
+                   'Ti$^{2+}$': G_rm_one_M2_Hs,
+                   'Ti$^{3+}$': G_rm_one_M3_Hs,
+                  'Bare surface': bare_PdHs
                   }
     elif system == 'Pd_pure':
-        tuples = {'Gb_HOCOs': Gb_HOCOs,
+        tuples = {'HOCO*': Gb_HOCOs,
                   # 'Gb_CO_ref_es': Gb_CO_ref_es,
-                  'Gb_COs': Gb_COs,
-                  'Gb_Hs': Gb_Hs,
-                  'Gb_OHs': Gb_OHs,
-                  'G_rm_one_M2_H': G_rm_one_M2_Hs,
+                  'CO*': Gb_COs,
+                  'H*': Gb_Hs,
+                  'OH*': Gb_OHs,
+                  'Pd$^{2+}$': G_rm_one_M2_Hs,
                   # 'G_rm_one_M2': G_rm_one_M2s,
                    # 'G_rm_one_M3': G_rm_one_M3s,
                     # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                    # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                    # 'G_rm_one_M2': G_rm_one_M2s,
-                  'bare_PdH': bare_PdHs
+                  'Bare surface': bare_PdHs
                   }
     df = pd.DataFrame(tuples)
     if type(pH) == int or type(pH) == float:
@@ -393,10 +394,27 @@ if __name__ == '__main__':
         U = [-2, 3]
         pH = 0
         pourbaix_diagram(U, pH, system)
-        plt.title(str(system))
+        # plt.title(str(system))
+        if system == 'Nb_overly':
+            plt.title('Nb doping for overlayer')
+        elif system == 'Ti_overly':
+            plt.title('Ti doping for overlayer')
+        elif system == 'Ti_paral':
+            plt.title('Ti doping for parallelogram')
+        elif system == 'Pd_pure':
+            plt.title('Pure PdH (111)')
         plt.show()
         
         pH = [0, 14]
         pourbaix_diagram(U, pH, system)
-        plt.title(str(system))
+        # plt.title(str(system))
+        if system == 'Nb_overly':
+            plt.title('Nb doping for overlayer')
+        elif system == 'Ti_overly':
+            plt.title('Ti doping for overlayer')
+        elif system == 'Ti_paral':
+            plt.title('Ti doping for parallelogram')
+        elif system == 'Pd_pure':
+            plt.title('Pure PdH (111)')
+        plt.margins(0.0)
         plt.show()
