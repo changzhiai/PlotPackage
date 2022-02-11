@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 18 16:56:18 2022
+Created on Wed Feb  9 12:07:44 2022
 
 @author: changai
 """
@@ -101,8 +101,10 @@ def pourbaix_diagram(U, pH, system):
     G_Nb3plus = E_Nb_bulk + 3 * (-0.8) + 0.0592 * np.log(10**(-6))
     G_Nb_OH_4 = E_Nb_bulk + 4 * G_H2Og - 2 * G_H2g + 5*(-0.537) + 0.0592 * np.log(10**(-6))
     # G_Ti2plus = E_Ti_bulk + 2 * (-1.63) + 0.0592 * np.log(10**(-6))
-    G_Ti2plus = E_Ti_bulk + 2 * (-1.628) + 0.0592 * np.log(10**(-6))
-    G_Ti3plus = E_Ti_bulk + 3 * (-1.26) + 0.0592 * np.log(10**(-6))
+    # G_Ti2plus = E_Ti_bulk + 2 * (-1.628) + 0.0592 * np.log(10**(-6))
+    # G_Ti3plus = E_Ti_bulk + 3 * (-1.26) + 0.0592 * np.log(10**(-6))
+    G_Ti2plus = E_Ti_bulk + 2 * (-1.60) + 0.0592 * np.log(10**(-6))
+    G_Ti3plus = E_Ti_bulk + 3 * (-1.37) + 0.0592 * np.log(10**(-6))
     G_Ti_OH_2 = E_Ti_bulk + 2 * G_H2Og - G_H2g + 4*(-1) + 0.0592 * np.log(10**(-6))
     
     if system == 'Nb_overly':
@@ -203,8 +205,8 @@ def pourbaix_diagram(U, pH, system):
                 G_rm_one_M_OH_4s.append(G_rm_one_M_OH_4)
                 
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_first_bilayer_M3, bare_PdH]
-                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3_H, bare_PdH]
-                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3, bare_PdH]
+                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3_H, bare_PdH]
+                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3_H, G_rm_one_M_OH_4, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M3, G_rm_one_M3_H, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M_OH_4, bare_PdH]
@@ -234,8 +236,8 @@ def pourbaix_diagram(U, pH, system):
                 G_rm_one_M_OH_2 = E_Pd45Ti8H54 + G_Ti_OH_2 + G_H2g - 4*u - 2*G_H2Og - E_Pd45Ti9H54 - 2 * kB * T * ph * np.log(10)
                 G_rm_one_M_OH_2s.append(G_rm_one_M_OH_2)
                 
-                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
-                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, G_rm_one_M3, bare_PdH]
+                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
+                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, G_rm_one_M3, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M_OH_2, bare_PdH]
                 # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, bare_PdH]
             
@@ -263,8 +265,8 @@ def pourbaix_diagram(U, pH, system):
                 G_rm_one_M_OH_2 = E_Pd50Ti3H53 + G_Ti_OH_2 + G_H2g - 4*u - 2*G_H2Og - E_Pd50Ti4H54 - 2 * kB * T * ph * np.log(10)
                 G_rm_one_M_OH_2s.append(G_rm_one_M_OH_2)
                 
-                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
-                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, G_rm_one_M3, bare_PdH]
+                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, G_rm_one_M3_H, bare_PdH]
+                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, G_rm_one_M3, bare_PdH]
             
             elif system == 'Pd_pure':
                 # only remove one Nb to be Pd2+ on E_Pd54H54 surface
@@ -279,8 +281,8 @@ def pourbaix_diagram(U, pH, system):
                 G_rm_first_bilayer_M2s.append(G_rm_first_bilayer_M2)
                 # G_rm_first_bilayer_M = (E_Pd45H45 + 9*G_Pd2plus - 27*u + 9*0.5*G_H2g - E_Pd54H54 - 9 * kB * T * ph * np.log(10))/ 9.0
                 
-                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, bare_PdH]
-                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, bare_PdH]
+                G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2_H, bare_PdH]
+                # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_one_M2, bare_PdH]
                 
                 
             # G_values = [Gb_HOCO, Gb_CO, Gb_H, Gb_OH, G_rm_first_bilayer_M, bare_PdH]
@@ -303,10 +305,11 @@ def pourbaix_diagram(U, pH, system):
                   'Gb_COs': Gb_COs,
                   'Gb_Hs': Gb_Hs,
                   'Gb_OHs': Gb_OHs,
-                  'G_rm_one_M3': G_rm_one_M3s,
+                  # 'G_rm_one_M2': G_rm_one_M2s,
+                   # 'G_rm_one_M3': G_rm_one_M3s,
                    # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                     # 'G_rm_one_M_OH_4': G_rm_one_M_OH_4s,
-                  # 'G_rm_one_M3_H': G_rm_one_M3_Hs,
+                  'G_rm_one_M3_H': G_rm_one_M3_Hs,
                   'bare_PdH': bare_PdHs
                   }
     elif system == 'Ti_overly':
@@ -315,13 +318,13 @@ def pourbaix_diagram(U, pH, system):
                   'Gb_COs': Gb_COs,
                   'Gb_Hs': Gb_Hs,
                   'Gb_OHs': Gb_OHs,
-                  'G_rm_one_M2': G_rm_one_M2s,
-                  'G_rm_one_M3': G_rm_one_M3s,
+                   # 'G_rm_one_M2': G_rm_one_M2s,
+                   # 'G_rm_one_M3': G_rm_one_M3s,
                   # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                   # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                    # 'G_rm_one_M_OH_2': G_rm_one_M_OH_2s,
-                   # 'G_rm_one_M2_H': G_rm_one_M2_Hs,
-                   # 'G_rm_one_M3_H': G_rm_one_M3_Hs,
+                   'G_rm_one_M2_H': G_rm_one_M2_Hs,
+                   'G_rm_one_M3_H': G_rm_one_M3_Hs,
                   'bare_PdH': bare_PdHs
                   }
     elif system == 'Ti_paral':
@@ -330,12 +333,12 @@ def pourbaix_diagram(U, pH, system):
                   'Gb_COs': Gb_COs,
                   'Gb_Hs': Gb_Hs,
                   'Gb_OHs': Gb_OHs,
-                  'G_rm_one_M2': G_rm_one_M2s,
-                  'G_rm_one_M3': G_rm_one_M3s,
+                  # 'G_rm_one_M2': G_rm_one_M2s,
+                  # 'G_rm_one_M3': G_rm_one_M3s,
                   # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                   # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
-                   # 'G_rm_one_M2_H': G_rm_one_M2_Hs,
-                   # 'G_rm_one_M3_H': G_rm_one_M3_Hs,
+                   'G_rm_one_M2_H': G_rm_one_M2_Hs,
+                   'G_rm_one_M3_H': G_rm_one_M3_Hs,
                   'bare_PdH': bare_PdHs
                   }
     elif system == 'Pd_pure':
@@ -344,8 +347,9 @@ def pourbaix_diagram(U, pH, system):
                   'Gb_COs': Gb_COs,
                   'Gb_Hs': Gb_Hs,
                   'Gb_OHs': Gb_OHs,
-                  # 'G_rm_one_M2_H': G_rm_one_M2_Hs,
-                   'G_rm_one_M2': G_rm_one_M2s,
+                  'G_rm_one_M2_H': G_rm_one_M2_Hs,
+                  # 'G_rm_one_M2': G_rm_one_M2s,
+                   # 'G_rm_one_M3': G_rm_one_M3s,
                     # 'G_rm_first_bilayer_M2': G_rm_first_bilayer_M2s,
                    # 'G_rm_first_bilayer_M3': G_rm_first_bilayer_M3s,
                    # 'G_rm_one_M2': G_rm_one_M2s,

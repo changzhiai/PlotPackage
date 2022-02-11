@@ -245,7 +245,8 @@ def pourbaix_diagram(U, pH):
               'Gb_OHs': Gb_OHs,
               'Colors': colors,
               }
-    df_FE = pd.DataFrame(tuples)
+    df_Pourbaix = pd.DataFrame(tuples)
+    # df_bonds.to_excel(xls_name, sheet_name_origin, float_format='%.3f')
     
         
 if __name__ == '__main__':
