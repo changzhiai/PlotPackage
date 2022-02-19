@@ -19,6 +19,8 @@ from CO2toCO_acid import CO2toCO
 from matplotlib import rc
 # rc('font', **{'family':'sans-serif','sans-serif':['Helvetica'], 'size':8})
 
+# pip install xlrd==1.2.0
+
 G_CO2g = -18.418 # eV
 G_H2g = -7.096# eV
 G_H2Og = -12.827 # eV
