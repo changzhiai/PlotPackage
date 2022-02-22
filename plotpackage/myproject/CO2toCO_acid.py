@@ -42,8 +42,11 @@ class CO2toCO():
             A32 = 1. #k3
             A33 = 1. #-(k1 * pCO2 * cHp + k3r * pCO)
             self.A = np.array([[A11, A12, A13],
-                               [A21, A22, A23],
-                               [A31, A32, A33]])
+                                [A21, A22, A23],
+                                [A31, A32, A33]], dtype=float)
+            # self.A = np.array([[A11, A12, A13],
+            #                    [A21, A22, A23],
+            #                    [A31, A32, A33]])
             self.b[-1] = 1.
 
     def solve2(self):
