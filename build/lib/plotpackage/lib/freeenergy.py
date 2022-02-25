@@ -40,6 +40,10 @@ class EnergyDiagram:
         # self.fig = None
         self.ax = None
         self.label = []   
+        
+        # fixed y range
+        # self.ymin = None
+        # self.ymax = None
 
     def add_level(self, energy, bottom_text='', position=None, color='k',
                   top_text='', right_text='', left_text='', label=''):
@@ -99,8 +103,10 @@ class EnergyDiagram:
                     print('run this line')
         print('\n after removing', self.barriers)
 
-    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title='', ratio=1.6181):
+    def plot(self, show_IDs=False, xlabel = "Reaction coordinate", ylabel="Free energy (eV)", xtickslabel='write xticks', stepLens=4, ax: plt.Axes = None, title='', ratio=1.6181, ymin=None, ymax=None):
         self.ratio = ratio
+        self.ymin = ymin
+        self.ymax = ymax
         # Create a figure and axis if the user didn't specify them.
         if not ax:
             fig = plt.figure(figsize=(8,6), dpi = 300)
@@ -245,7 +251,11 @@ class EnergyDiagram:
         '''
         # Max range between the energy
         self.all_energies = self.energies + self.ts_energies
-        Energy_variation = abs(max(self.all_energies) - min(self.all_energies))
+        if self.ymin == None and self.ymax == None:
+            Energy_variation = abs(max(self.all_energies) - min(self.all_energies))
+        else:
+            Energy_variation = self.ymax - self.ymin
+        
         if self.dimension == 'auto' or self.space == 'auto':
             # Unique positions of the levels
             unique_positions = float(len(set(self.positions)))

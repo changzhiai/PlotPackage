@@ -119,11 +119,11 @@ class EnergyDiagram:
             self.ax.set_aspect(self.aspect)
 
 
-        ax.set_xlabel(xlabel, fontsize=14) #xlabel frontsize
-        ax.set_ylabel(ylabel, fontsize=14) #ylabel frontsize
+        ax.set_xlabel(xlabel, fontsize=15) #xlabel frontsize
+        ax.set_ylabel(ylabel, fontsize=15) #ylabel frontsize
         
-        ax.tick_params(axis="x", labelsize=12) #xtick frontsize
-        ax.tick_params(axis="y", labelsize=12) #ytick frontsize
+        ax.tick_params(axis="x", labelsize=13) #xtick frontsize
+        ax.tick_params(axis="y", labelsize=13) #ytick frontsize
         #ax.tick_params(labelsize=8)
         
         ax.axes.get_xaxis().set_visible(True)

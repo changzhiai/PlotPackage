@@ -34,17 +34,9 @@ class ScalingRelationPlot:
 
         #fig = plt.figure(figsize=(8, 6), dpi = 300)
         #plt.plot(self.descriper1, self.descriper2, 's', color='black')  #plot dots
-        
-        for i, name in enumerate(self.observationName):
-            try:
-                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=self.colorList[name])  #plot dots
-                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=self.colorList[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-            except:
-                plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor)  #plot dots
-                plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-
+        old_color = True
         # add element tags
-        if False: #detached
+        if old_color == True: #detached
             if isinstance(dotcolor, dict)==True:
                 for i, name in enumerate(self.observationName):
                     plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor[name])  #plot dots
@@ -53,20 +45,29 @@ class ScalingRelationPlot:
                 plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
                 for i, name in enumerate(self.observationName):
                     plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
-                    
+        else:
+            for i, name in enumerate(self.observationName):
+                try:
+                    plt.plot(self.descriper1[i], self.descriper2[i], 's', color=self.colorList[name])  #plot dots
+                    plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=self.colorList[name], fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+                except:
+                    plt.plot(self.descriper1[i], self.descriper2[i], 's', color=dotcolor)  #plot dots
+                    plt.annotate(name, (self.descriper1[i], self.descriper2[i]+0.005), color=dotcolor, fontsize=14, horizontalalignment='center', verticalalignment='bottom')
+
+                           
 
         # plt.plot(self.descriper1, self.descriper2, 's', color=dotcolor)  #plot dots
-        plt.xlabel(xlabel, fontsize=14)
-        plt.ylabel(ylabel, fontsize=14)
+        plt.xlabel(xlabel, fontsize=15)
+        plt.ylabel(ylabel, fontsize=15)
         ax.yaxis.set_label_coords(-0.12, 0.5)
         ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
         plt.margins(y=0.08)
         plt.title(title, fontsize=14)
-        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=14, fontweight='bold')        
+        plt.text(0.05, 0.93, text, horizontalalignment='left', verticalalignment='center', transform=ax.transAxes, fontsize=15, fontweight='bold')        
         
         #get current axis object and change format
         #ax = fig.gca()
-        ax.tick_params(labelsize=12) #tick label font size
+        ax.tick_params(labelsize=13) #tick label font size
         for axis in ['top','bottom','left','right']:
             ax.spines[axis].set_linewidth(1.2) #linewith of frame
         

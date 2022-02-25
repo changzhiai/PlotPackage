@@ -9,6 +9,7 @@ from plotpackage.lib.io import read_excel, read_csv
 from plotpackage.lib.freeenergy import EnergyDiagram
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
+from plotpackage.lib.styles import colorList
 
 class CO2RRFEDplot:
     def __init__(self, stepsnames, obsername, X_, figname):
@@ -31,10 +32,11 @@ class CO2RRFEDplot:
         #                   'teal', 'thistle', 'y', 'tan', 'navy', 'wheat', 'gold', 'lightcoral', 'silver', 'violet', 'turquoise', 'seagreen', 'tan', \
         #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown',\
         #                   'k', 'lime', 'r', 'b', 'darkcyan', 'cyan', 'olive', 'magenta', 'pink', 'gray', 'orange', 'purple', 'g', 'pink', 'brown']
-        self.colorList = {'PdH': 'black', 'Pure': 'black', 'Ti': 'red', 'Pd': 'black', 'Sc': 'blue', 'V': 'orange', 'Cr': 'wheat', 'Mn': 'green', \
-                          'Fe': 'lightgray', 'Co': 'deepskyblue', 'Ni': 'pink', 'Cu': 'purple', 'Zn': 'olive', 'Y': 'cyan', 'Zr': 'lime', \
-                          'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen', 'Cd': 'steelblue', 'Hf': 'slateblue', \
-                          'Ta': 'violet', 'W': 'deeppink', 'Re': 'palevioletred'}
+        # self.colorList = {'PdH': 'black', 'Pure': 'black', 'Ti': 'red', 'Pd': 'black', 'Sc': 'blue', 'V': 'orange', 'Cr': 'wheat', 'Mn': 'green', \
+        #                   'Fe': 'lightgray', 'Co': 'deepskyblue', 'Ni': 'pink', 'Cu': 'purple', 'Zn': 'olive', 'Y': 'cyan', 'Zr': 'lime', \
+        #                   'Nb': 'yellow', 'Mo': 'navy', 'Ru': 'magenta', 'Rh': 'brown', 'Ag': 'lightseagreen', 'Cd': 'steelblue', 'Hf': 'slateblue', \
+        #                   'Ta': 'violet', 'W': 'deeppink', 'Re': 'palevioletred'}
+        self.colorList = colorList
         #colorList = ['gray', 'brown', 'orange', 'olive', 'green', 'cyan', 'blue', 'purple', 'pink', 'red']
         #colorList = ['k', 'g', 'r', 'b', 'c', 'm', 'y', 'brown', 'pink', 'gray', 'orange', 'purple', 'olive']
         #self.stepsNames = ['* + CO2', '*HOCO', '*CO', '* + CO']  #reload step name for CO2RR
@@ -66,7 +68,7 @@ class CO2RRFEDplot:
         if start_id != None and end_id != None:
             self.diagram.remove_link(start_id, end_id)
     
-    def plot(self, ax: plt.Axes = None, title='', save = False, legend=True, legendSize = 14, text='', ratio=1.6181):
+    def plot(self, ax: plt.Axes = None, title='', save = False, legend=True, legendSize = 14, text='', ratio=1.6181, ymin=None, ymax=None):
         if not ax:
             figFree = plt.figure(figsize=(8, 6), dpi = 300)
             axFree = figFree.add_subplot(111)
@@ -76,8 +78,9 @@ class CO2RRFEDplot:
             # self.fig = ax.figure
            
         #diagram.add_barrier(start_level_id=1, barrier=1, end_level_id=2) #add energy barriers
-        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio) # this is the default ylabel
-        
+        pos = self.diagram.plot(xtickslabel = self.stepsNames, stepLens=len(self.stepsNames), ax=axFree, ratio=ratio, ymin=ymin, ymax=ymax) # this is the default ylabel
+        if ymin != None and ymax != None:
+            plt.ylim(ymin, ymax)
         # add legend
         # for specis in range(len(self.observationName)):
         for i, specis in enumerate(self.observationName):
@@ -92,5 +95,6 @@ class CO2RRFEDplot:
         if save == True: 
             plt.show()
             figFree.savefig(self.figName, dpi=300, bbox_inches='tight')
-        
+        # print('test:', pos[0])
         # return figFree
+        # return pos[0], pos[-1]

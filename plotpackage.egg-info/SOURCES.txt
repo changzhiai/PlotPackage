@@ -20,3 +20,7 @@ plotpackage/lib/figsmetadata.py
 plotpackage/lib/freeenergy.py
 plotpackage/lib/io.py
 plotpackage/lib/scalingrelation.py
+plotpackage/lib/styles.py
+plotpackage/myproject2/PdHy_CO2RR_FED.py
+plotpackage/myproject2/__init__.py
+plotpackage/myproject2/db2csv.py
